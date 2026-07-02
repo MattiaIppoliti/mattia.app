@@ -1517,7 +1517,7 @@ main .btn-hamburger.active {
     top: 0;
     position: absolute;
     background-color: var(--color-blue);
-    background-image: url("../img/Singapore.jpg");
+    background-image: url("../img/singapore-800.webp");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;

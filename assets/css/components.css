@@ -40,7 +40,7 @@
     position: relative;
     display: inline-flex;
     border-radius: 50%;
-    background: url("../img/profile.png") center center no-repeat;
+    background: url("../img/profile-320.webp") center center no-repeat;
     background-size: cover;
     width: clamp(4.5em, 6.5vw, 8em);
     height: clamp(4.5em, 6.5vw, 8em);
@@ -50,7 +50,7 @@
     position: relative;
     display: inline-flex;
     border-radius: 50%;
-    background: url("../img/profile_circular_notion.png") center center no-repeat;
+    background: url("../img/profile_notion-320.webp") center center no-repeat;
     background-size: cover;
     width: clamp(4.5em, 6.5vw, 8em);
     height: clamp(4.5em, 6.5vw, 8em);

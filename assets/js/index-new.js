@@ -499,6 +499,10 @@ function initPageTransitions() {
     }
 
 
+    if (typeof barbaPrefetch !== 'undefined') {
+        barba.use(barbaPrefetch);
+    }
+
     barba.init({
         sync: true,
         debug: false,

@@ -2056,7 +2056,7 @@ main .btn-hamburger.active {
     top: 0;
     position: absolute;
     background-color: var(--color-blue);
-    background-image: url("../img/Singapore.jpg");
+    background-image: url("../img/singapore-800.webp");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -2192,7 +2192,7 @@ input[type=radio] {
     position: relative;
     display: inline-flex;
     border-radius: 50%;
-    background: url("../img/profile.png") center center no-repeat;
+    background: url("../img/profile-320.webp") center center no-repeat;
     background-size: cover;
     width: clamp(4.5em, 6.5vw, 8em);
     height: clamp(4.5em, 6.5vw, 8em);
@@ -2202,7 +2202,7 @@ input[type=radio] {
     position: relative;
     display: inline-flex;
     border-radius: 50%;
-    background: url("../img/profile_circular_notion.png") center center no-repeat;
+    background: url("../img/profile_notion-320.webp") center center no-repeat;
     background-size: cover;
     width: clamp(4.5em, 6.5vw, 8em);
     height: clamp(4.5em, 6.5vw, 8em);
@@ -3652,7 +3652,7 @@ html.touch-device main .main-wrap {
     height: 3em;
     width: 3em;
     transform: translateY(.09em);
-    background: url("../img/profile_circular_notion.png") center center no-repeat;
+    background: url("../img/profile_notion-320.webp") center center no-repeat;
     background-size: cover;
 }
 
@@ -3661,7 +3661,7 @@ html.touch-device main .main-wrap {
     margin-right: .5em;
     height: 4.5em;
     width: 4.5em;
-    background: url("../img/profile_circular_notion.png") center center no-repeat;
+    background: url("../img/profile_notion-320.webp") center center no-repeat;
     background-size: cover;
     display: inline-block;
 }
@@ -3824,7 +3824,7 @@ html.touch-device main .main-wrap {
         height: 2.4em;
         width: 2.4em;
         transform: translateY(.1em);
-        background: url("../img/profile_circular_notion.png") center center no-repeat;
+        background: url("../img/profile_notion-320.webp") center center no-repeat;
         background-size: cover;
     }
     .footer-cover {
@@ -5254,7 +5254,7 @@ html.prefers-work-columns #work .grid-columns-part {
 }
 
 .single-about-image .overlay:nth-child(1) {
-    background: url("../img/optimized/singapore-3-opt.jpg") center center no-repeat;
+    background: url("../img/optimized/singapore-3.webp") center center no-repeat;
     background-size: cover;
     top: -20vh;
     height: 105%;
@@ -5564,13 +5564,13 @@ html.prefers-work-columns #work .grid-columns-part {
 }
 
 .about-awwwards .single-image .overlay:nth-child(1) {
-    background: url("../img/optimized/singapore-vertical-opt.jpg") center center no-repeat;
+    background: url("../img/optimized/singapore-vertical.webp") center center no-repeat;
     background-size: cover;
     height: 100%;
     top: -25%;
     width: 105%;
     left: -25%;
-    background: url("../img/optimized/singapore-vertical-opt.jpg") center center no-repeat;
+    background: url("../img/optimized/singapore-vertical.webp") center center no-repeat;
     background-size: cover;
     top: -3%;
     height: 106%;
@@ -5600,7 +5600,7 @@ html.prefers-work-columns #work .grid-columns-part {
         padding-top: 125%;
     }
     .about-awwwards .single-image .overlay:nth-child(1) {
-        background: url("../img/optimized/singapore-opt.jpg") center center no-repeat;
+        background: url("../img/optimized/singapore.webp") center center no-repeat;
         background-size: cover;
         top: -8%;
         height: 110%;
