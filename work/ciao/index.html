@@ -99,70 +99,7 @@
         }
       ]
     }
-    </script>
-        <style>
-            .project-hero { position: relative; overflow: hidden; }
-            .project-decor { position: absolute; inset: 0; pointer-events: none; }
-            .project-body .row { padding-top: 1.6em; }
-            .project-body .row:first-child { padding-top: 0; }
-            .project-body p { max-width: 44em; }
-            .project-figure { padding-top: 1.1em !important; }
-            .project-figure img { width: 100%; height: auto; display: block; border-radius: 14px; }
-            .project-meta-row { display: flex; flex-wrap: wrap; row-gap: 3.2em; }
-            .project-meta-row .flex-col { width: 33.333%; min-width: 220px; padding-right: 2em; margin-bottom: 1.4em; }
-            .project-meta-row .section-label { margin: 0; font-size: .8em; }
-            .project-meta-row .stripe { margin-top: 1.1em; margin-bottom: 1.5em; }
-            .project-meta-row h4 { margin: 0; }
-            .project-meta-row ul { padding-top: .8em; padding-bottom: .4em; }
-            .project-note { display: flex !important; flex-direction: row !important; align-items: flex-start; gap: 1.1em; }
-            .project-note-icon { flex: 0 0 auto; width: 34px; max-width: 34px; color: var(--color-dark); opacity: .55; }
-            .project-note-icon svg, .project-note-icon img { width: 34px; max-width: 34px; height: auto; display: block; }
-            .project-note-icon-lg, .project-note-icon-lg img { width: 46px; max-width: 46px; }
-            .project-note p { flex: 1 1 auto; }
-            /* Horizontal strip: pinned section, image pans while the page scrolls. */
-            .h-strip { padding: 0 !important; overflow: hidden; }
-            .h-strip-viewport { min-height: calc(var(--vh, 1vh) * 78); display: flex; align-items: center; overflow: hidden; }
-            .h-strip-track { display: flex; will-change: transform; }
-            .h-strip-img { height: 56vh; width: auto; max-width: none; display: block; border-radius: 14px; }
-            html.touch-device .h-strip-viewport { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-            html.touch-device .h-strip-track { transform: none !important; padding-left: 0; }
-            html.touch-device .h-strip-img { height: 40vh; }
-            @media (prefers-reduced-motion: reduce) {
-                .h-strip-viewport { overflow-x: auto; }
-                .h-strip-track { transform: none !important; }
-            }
-            @media (max-width: 767px) {
-                .h-strip-img { height: 34vh; }
-                .project-meta-row .flex-col { width: 100%; padding-right: 0; margin-bottom: 1.8em; }
-                .project-note-icon, .project-note-icon svg, .project-note-icon img { width: 26px; max-width: 26px; }
-            }
-
-            /* Ciele hero clouds: slide in on load, then drift forever.
-               Ported from the hero-clouds component on ciele.app. */
-            .ciele-cloud-wrap { position: absolute; will-change: transform; }
-            .ciele-cloud-wrap-left { left: -6%; top: 16%; width: 40%; max-width: 560px;
-                animation: ciele-cloud-enter-left 1.2s cubic-bezier(0.22, 1, 0.36, 1); }
-            .ciele-cloud-wrap-right { right: -7%; top: 2%; width: 42%; max-width: 600px;
-                animation: ciele-cloud-enter-right 1.5s cubic-bezier(0.22, 1, 0.36, 1); }
-            .ciele-cloud { width: 100%; height: auto; display: block; opacity: .55;
-                animation: ciele-cloud-drift 14s ease-in-out infinite alternate; }
-            .ciele-cloud-slow { animation-duration: 22s; animation-delay: -6s; }
-            @keyframes ciele-cloud-enter-left {
-                from { transform: translate3d(-120%, -35%, 0); }
-                to { transform: translate3d(0, 0, 0); }
-            }
-            @keyframes ciele-cloud-enter-right {
-                from { transform: translate3d(120%, -35%, 0); }
-                to { transform: translate3d(0, 0, 0); }
-            }
-            @keyframes ciele-cloud-drift {
-                from { transform: translateX(-1.5%); }
-                to { transform: translateX(1.5%); }
-            }
-            @media (prefers-reduced-motion: reduce) {
-                .ciele-cloud, .ciele-cloud-wrap { animation: none; }
-            }
-        </style></head>
+    </script></head>
 
 <body data-barba="wrapper">
     <div class="no-scroll-overlay"></div>
@@ -197,7 +134,7 @@
                 </h2>
                 <h2 class="active">Ciao!<div class="dot"></div>
                 </h2>
-                <h2>Ciao! Surveys<div class="dot"></div>
+                <h2>Surveys AI Platform<div class="dot"></div>
                 </h2>
                 <h2>Ciele<div class="dot"></div>
                 </h2>
@@ -212,6 +149,96 @@
         </div>
     </div>
     <main class="main" id="project-ciao" data-barba="container" data-barba-namespace="project-ciao">
+        <style>
+            .project-hero { position: relative; overflow: hidden; }
+            .project-decor { position: absolute; inset: 0; pointer-events: none; }
+            .project-body .row { padding-top: 1.6em; }
+            .project-body .row:first-child { padding-top: 0; }
+            /* Copy runs to the same width as the figures rather than
+               stopping at a 44em measure. */
+            .project-body p { max-width: none; }
+            .project-figure { padding-top: 1.1em !important; }
+            .project-figure img { width: 100%; height: auto; display: block; border-radius: 14px; }
+            .project-meta-row { display: flex; flex-wrap: wrap; row-gap: 4.4em; }
+            .project-meta-row .flex-col { width: 33.333%; min-width: 220px; padding-right: 2em; margin-bottom: 2em; }
+            .project-meta-row .section-label { margin: 0; font-size: .8em; }
+            .project-meta-row .stripe { margin-top: 1.1em; margin-bottom: 1.5em; }
+            .project-meta-row h4 { margin: 0; }
+            .project-meta-row ul { padding-top: .8em; padding-bottom: .4em; }
+            .project-note { display: flex !important; flex-direction: row !important; align-items: flex-start; gap: 1.1em; }
+            .project-note-icon { flex: 0 0 auto; width: 34px; max-width: 34px; color: var(--color-dark); opacity: .55; }
+            .project-note-icon svg, .project-note-icon img { width: 34px; max-width: 34px; height: auto; display: block; }
+            .project-note-icon-lg, .project-note-icon-lg img { width: 46px; max-width: 46px; }
+            .project-note p { flex: 1 1 auto; }
+            /* Horizontal strip. The section is exactly one viewport tall plus the
+               image's overhang, so the extra scroll distance equals the distance
+               the image has to travel. horizontal-strip.js holds the frame still
+               over that stretch and slides the image by the same number of pixels
+               the page scrolled, 1:1 - so reaching the strip turns the scroll
+               sideways, and vertical scrolling resumes once the far edge lands. */
+            .h-strip {
+                --strip-ratio: 8.0014;                              /* 11250 / 1406 */
+                --strip-h: calc(var(--vh, 1vh) * 62);
+                /* The frame is only a little taller than the picture. A full
+                   100vh frame letterboxed it by 19vh a side, which read as a
+                   slab of empty white under the label on the way in. */
+                --strip-frame: calc(var(--vh, 1vh) * 72);
+                --strip-w: calc(var(--strip-h) * var(--strip-ratio));
+                --strip-travel: max(0px, calc(var(--strip-w) - 100vw));
+                position: relative; padding: 0 !important; overflow: hidden;
+                height: calc(var(--strip-frame) + var(--strip-travel));
+            }
+            .h-strip-viewport {
+                height: var(--strip-frame);
+                display: flex; align-items: center; overflow: hidden;
+                will-change: transform;
+            }
+            .h-strip-track { display: flex; will-change: transform; }
+            .h-strip-img { height: var(--strip-h); width: var(--strip-w); max-width: none; display: block; border-radius: 14px; }
+            /* No pin without a pointer, or when motion is unwelcome: the strip
+               collapses to its natural height and pans by native swipe instead. */
+            html.touch-device .h-strip { height: auto; }
+            html.touch-device .h-strip-viewport { height: auto; padding: 5vh 0; overflow-x: auto; -webkit-overflow-scrolling: touch; transform: none !important; }
+            html.touch-device .h-strip-track { transform: none !important; padding-left: 0; }
+            html.touch-device .h-strip-img { height: 40vh; width: auto; }
+            @media (prefers-reduced-motion: reduce) {
+                .h-strip { height: auto; }
+                .h-strip-viewport { height: auto; padding: 5vh 0; overflow-x: auto; transform: none !important; }
+                .h-strip-track { transform: none !important; }
+                .h-strip-img { height: 40vh; width: auto; }
+            }
+            @media (max-width: 767px) {
+                .h-strip-img { height: 34vh; }
+                .project-meta-row .flex-col { width: 100%; padding-right: 0; margin-bottom: 2.6em; }
+                .project-note-icon, .project-note-icon svg, .project-note-icon img { width: 26px; max-width: 26px; }
+            }
+
+            /* Ciele hero clouds: slide in on load, then drift forever.
+               Ported from the hero-clouds component on ciele.app. */
+            .ciele-cloud-wrap { position: absolute; will-change: transform; }
+            .ciele-cloud-wrap-left { left: -6%; top: 16%; width: 40%; max-width: 560px;
+                animation: ciele-cloud-enter-left 1.2s cubic-bezier(0.22, 1, 0.36, 1); }
+            .ciele-cloud-wrap-right { right: -7%; top: 2%; width: 42%; max-width: 600px;
+                animation: ciele-cloud-enter-right 1.5s cubic-bezier(0.22, 1, 0.36, 1); }
+            .ciele-cloud { width: 100%; height: auto; display: block; opacity: .55;
+                animation: ciele-cloud-drift 14s ease-in-out infinite alternate; }
+            .ciele-cloud-slow { animation-duration: 22s; animation-delay: -6s; }
+            @keyframes ciele-cloud-enter-left {
+                from { transform: translate3d(-120%, -35%, 0); }
+                to { transform: translate3d(0, 0, 0); }
+            }
+            @keyframes ciele-cloud-enter-right {
+                from { transform: translate3d(120%, -35%, 0); }
+                to { transform: translate3d(0, 0, 0); }
+            }
+            @keyframes ciele-cloud-drift {
+                from { transform: translateX(-1.5%); }
+                to { transform: translateX(1.5%); }
+            }
+            @media (prefers-reduced-motion: reduce) {
+                .ciele-cloud, .ciele-cloud-wrap { animation: none; }
+            }
+        </style>
         <div class="btn btn-hamburger">
             <div class="btn-click magnetic" data-strength="50" data-strength-text="25">
                 <div class="btn-fill"></div>
@@ -429,7 +456,7 @@
                 </div>
                 <div class="row">
                     <div class="flex-col">
-                        <p>The client work spans web development, UX design and portfolio sites for people who need a presence built properly rather than assembled from a template. Next to that, Ciao! runs its own products. Ciao! Surveys grew out of the collective.</p>
+                        <p>The client work spans web development, UX design and portfolio sites for people who need a presence built properly rather than assembled from a template. Next to that, Ciao! runs its own products. Surveys AI Platform grew out of the collective.</p>
                     </div>
                 </div>
                 <div class="row">
@@ -447,9 +474,9 @@
         <section class="section h-strip" data-scroll-section>
             <div class="h-strip-viewport">
                 <div class="h-strip-track">
-                    <img class="h-strip-img" src="../../assets/img/projects/ciao-strip.webp"
+                    <img class="h-strip-img" src="../../assets/img/projects/ciao-scroll.webp"
                         alt="One pass across the Ciao! site, from the hero to the network and the contact call to action"
-                        width="4500" height="600" loading="eager" decoding="async">
+                        width="11250" height="1406" loading="lazy" decoding="async" fetchpriority="low">
                 </div>
             </div>
         </section>        <section class="section" data-scroll-section style="padding-top: 3.2em;">
