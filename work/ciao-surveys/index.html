@@ -1,0 +1,520 @@
+<!DOCTYPE html><!--  This site was created by Mattia Ippoliti  -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <script>
+        (function() {
+            document.documentElement.classList.add('js');
+            var coarsePointerMatch = window.matchMedia ? window.matchMedia('(hover: none), (pointer: coarse)').matches : false;
+            var isTouchDevice = coarsePointerMatch || ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+            document.documentElement.classList.add(isTouchDevice ? 'touch-device' : 'no-touch-device');
+            document.documentElement.classList.remove(isTouchDevice ? 'no-touch-device' : 'touch-device');
+            if (!window.__mattiaSetVh) {
+                window.__mattiaSetVh = function() {
+                    document.documentElement.style.setProperty('--vh', (window.innerHeight * 0.01) + 'px');
+                };
+            }
+            window.__mattiaSetVh();
+        })();
+    </script>
+
+    <title>Ciao! Surveys | Mattia Ippoliti</title>
+    <meta name="description"
+        content="Ciao! Surveys is a personality and beliefs survey platform: 181 prompts, trait dashboards across NEO, HEXACO and MPQ, and a chat that discusses your results.">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:url" content="https://mattia.app/work/ciao-surveys/">
+    <meta property="og:title" content="Ciao! Surveys | Mattia Ippoliti">
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+    <meta property="og:description"
+        content="Ciao! Surveys: personality and beliefs surveys with trait dashboards and a chat that discusses your results.">
+    <meta property="og:site_name" content="Mattia Ippoliti" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://mattia.app/assets/img/og-profile.jpg">
+    <link rel="canonical" href="https://mattia.app/work/ciao-surveys/">
+    <link rel="preload" href="../../assets/fonts/UncutSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../assets/fonts/UncutSans-Bold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../assets/fonts/Gulax-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <link href="../../assets/css/site.9720bb23.min.css" rel="stylesheet">
+        <style>
+            .project-hero { position: relative; overflow: hidden; }
+            .project-decor { position: absolute; inset: 0; pointer-events: none; }
+            .project-body .row { padding-top: 1.6em; }
+            .project-body .row:first-child { padding-top: 0; }
+            .project-body p { max-width: 44em; }
+            .project-figure { padding-top: 1.1em !important; }
+            .project-figure img { width: 100%; height: auto; display: block; border-radius: 14px; }
+            .project-meta-row { display: flex; flex-wrap: wrap; row-gap: 3.2em; }
+            .project-meta-row .flex-col { width: 33.333%; min-width: 220px; padding-right: 2em; margin-bottom: 1.4em; }
+            .project-meta-row .section-label { margin: 0; font-size: .8em; }
+            .project-meta-row .stripe { margin-top: 1.1em; margin-bottom: 1.5em; }
+            .project-meta-row h4 { margin: 0; }
+            .project-meta-row ul { padding-top: .8em; padding-bottom: .4em; }
+            .project-note { display: flex !important; flex-direction: row !important; align-items: flex-start; gap: 1.1em; }
+            .project-note-icon { flex: 0 0 auto; width: 34px; max-width: 34px; color: var(--color-dark); opacity: .55; }
+            .project-note-icon svg, .project-note-icon img { width: 34px; max-width: 34px; height: auto; display: block; }
+            .project-note-icon-lg, .project-note-icon-lg img { width: 46px; max-width: 46px; }
+            .project-note p { flex: 1 1 auto; }
+            @media (max-width: 767px) {
+                .project-meta-row .flex-col { width: 100%; padding-right: 0; margin-bottom: 1.8em; }
+                .project-note-icon, .project-note-icon svg, .project-note-icon img { width: 26px; max-width: 26px; }
+            }
+
+            /* Ciele hero clouds: slide in on load, then drift forever.
+               Ported from the hero-clouds component on ciele.app. */
+            .ciele-cloud-wrap { position: absolute; will-change: transform; }
+            .ciele-cloud-wrap-left { left: -6%; top: 16%; width: 40%; max-width: 560px;
+                animation: ciele-cloud-enter-left 1.2s cubic-bezier(0.22, 1, 0.36, 1); }
+            .ciele-cloud-wrap-right { right: -7%; top: 2%; width: 42%; max-width: 600px;
+                animation: ciele-cloud-enter-right 1.5s cubic-bezier(0.22, 1, 0.36, 1); }
+            .ciele-cloud { width: 100%; height: auto; display: block; opacity: .55;
+                animation: ciele-cloud-drift 14s ease-in-out infinite alternate; }
+            .ciele-cloud-slow { animation-duration: 22s; animation-delay: -6s; }
+            @keyframes ciele-cloud-enter-left {
+                from { transform: translate3d(-120%, -35%, 0); }
+                to { transform: translate3d(0, 0, 0); }
+            }
+            @keyframes ciele-cloud-enter-right {
+                from { transform: translate3d(120%, -35%, 0); }
+                to { transform: translate3d(0, 0, 0); }
+            }
+            @keyframes ciele-cloud-drift {
+                from { transform: translateX(-1.5%); }
+                to { transform: translateX(1.5%); }
+            }
+            @media (prefers-reduced-motion: reduce) {
+                .ciele-cloud, .ciele-cloud-wrap { animation: none; }
+            }
+        </style></head>
+
+<body data-barba="wrapper">
+    <div class="no-scroll-overlay"></div>
+    <div class="second-circle"></div>
+    <div class="loading-container">
+        <div class="loading-screen">
+            <div class="rounded-div-wrap top">
+                <div class="rounded-div"></div>
+            </div>
+            <div class="loading-words">
+                <h2 class="home-active home-active-first">Hello<div class="dot"></div>
+                </h2>
+                <h2 class="home-active">Bonjour<div class="dot"></div>
+                </h2>
+                <h2 class="home-active">स्वागत हे<div class="dot"></div>
+                </h2>
+                <h2 class="home-active">Hallo<div class="dot"></div>
+                </h2>
+                <h2 class="home-active">Olá<div class="dot"></div>
+                </h2>
+                <h2 class="home-active jap">おい<div class="dot"></div>
+                </h2>
+                <h2 class="home-active">Hallå<div class="dot"></div>
+                </h2>
+                <h2 class="home-active">Guten tag<div class="dot"></div>
+                </h2>
+                <h2 class="home-active-last">Ciao<div class="dot"></div>
+                </h2>
+                <h2>Home<div class="dot"></div>
+                </h2>
+                <h2>Work<div class="dot"></div>
+                </h2>
+                <h2>Ciao!<div class="dot"></div>
+                </h2>
+                <h2 class="active">Ciao! Surveys<div class="dot"></div>
+                </h2>
+                <h2>Ciele<div class="dot"></div>
+                </h2>
+                <h2>About<div class="dot"></div>
+                </h2>
+                <h2>Contact<div class="dot"></div>
+                </h2>
+            </div>
+            <div class="rounded-div-wrap bottom">
+                <div class="rounded-div"></div>
+            </div>
+        </div>
+    </div>
+    <main class="main" id="project-ciao-surveys" data-barba="container" data-barba-namespace="project-ciao-surveys">
+        <div class="btn btn-hamburger">
+            <div class="btn-click magnetic" data-strength="50" data-strength-text="25">
+                <div class="btn-fill"></div>
+                <div class="btn-text">
+                    <div class="btn-bars"></div>
+                    <span class="btn-text-inner">Menu</span>
+                </div>
+            </div>
+        </div>
+        <div class="overlay fixed-nav-back"></div>
+        <div class="fixed-nav theme-dark">
+            <div class="fixed-nav-rounded-div">
+                <div class="rounded-div-wrap">
+                    <div class="rounded-div"></div>
+                </div>
+            </div>
+            <div class="fixed-nav-inner">
+                <div class="row nav-row">
+                    <p class="section-label">Navigation</p>
+                    <div class="stripe"></div>
+                    <ul class="links-wrap">
+                        <li class="btn btn-link">
+                            <a href="../../" class="btn-click magnetic" data-strength="24"
+                                data-strength-text="12">
+                                <span class="btn-text btn-text-menu">
+                                    <span class="btn-text-inner">Home</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="btn btn-link active">
+                            <a href="../" class="btn-click magnetic" data-strength="24"
+                                data-strength-text="12">
+                                <span class="btn-text btn-text-menu">
+                                    <span class="btn-text-inner">Work</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="btn btn-link">
+                            <a href="../../about/" class="btn-click magnetic" data-strength="24"
+                                data-strength-text="12">
+                                <span class="btn-text btn-text-menu">
+                                    <span class="btn-text-inner">About</span>
+                                </span>
+                            </a>
+                        </li>
+
+                        <li class="btn btn-link">
+                            <a href="../../contact/" class="btn-click magnetic" data-strength="24"
+                                data-strength-text="12">
+                                <span class="btn-text btn-text-menu">
+                                    <span class="btn-text-inner">Contact</span>
+                                </span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="row social-row">
+                    <div class="stripe"></div>
+                    <div class="socials">
+                        <p class="section-label">Socials</p>
+                        <ul>
+                            <li class="btn btn-link btn-link-external">
+                                <a href="https://www.linkedin.com/in/mattiaippoliti/" target="_blank"
+                                    class="btn-click magnetic" data-strength="20" data-strength-text="10">
+                                    <span class="btn-text">
+                                        <span class="btn-text-inner">LinkedIn</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="btn btn-link btn-link-external">
+                                <a href="https://www.researchgate.net/profile/Mattia-Ippoliti" target="_blank"
+                                    class="btn-click magnetic" data-strength="20" data-strength-text="10">
+                                    <span class="btn-text">
+                                        <span class="btn-text-inner">ResearchGate</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="btn btn-link btn-link-external">
+                                <a href="https://github.com/MattiaIppoliti" target="_blank" class="btn-click magnetic"
+                                    data-strength="20" data-strength-text="10">
+                                    <span class="btn-text">
+                                        <span class="btn-text-inner">Github</span>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-wrap" data-scroll-container>
+            <header class="section default-header project-hero" data-scroll-section>
+                <div class="project-decor" aria-hidden="true">
+                    <img src="../../assets/img/projects/decor/ciao-surveys-sun-full.webp" alt="" loading="lazy"
+                        style="position:absolute; right:3%; top:-16%; width:38%; max-width:520px; opacity:.8; -webkit-mask-image:radial-gradient(circle at 50% 32%, #000 22%, transparent 46%); mask-image:radial-gradient(circle at 50% 32%, #000 22%, transparent 46%);">
+                    <img src="../../assets/img/projects/decor/ciao-surveys-sun-full.webp" alt="" loading="lazy"
+                        style="position:absolute; left:2%; bottom:-30%; width:26%; max-width:340px; opacity:.55; -webkit-mask-image:radial-gradient(circle at 50% 32%, #000 20%, transparent 44%); mask-image:radial-gradient(circle at 50% 32%, #000 20%, transparent 44%);">
+                </div>                <div class="nav-bar">
+                    <div class="credits-top">
+                        <div class="btn btn-link btn-left-top">
+                           <a href="../../" class="btn-click magnetic" data-strength="20"
+                           data-strength-text="10" style="transform: rotate(0.001deg);">
+                           <span class="btn-text">
+                               <div class="cbd"><span class="code-by">Hi👋! I am</span><span class="mattia"><span
+                                           class="mattia-span">Mattia</span> <span
+                                           class="ippoliti">Ippoliti</span></span>
+                           </span>
+                   </div>
+                   </span>
+                       </a>
+                     </div>
+                </div>
+                <ul class="links-wrap">
+                    <li class="btn btn-link active">
+                        <a href="../" class="btn-click magnetic" data-strength="20"
+                            data-strength-text="10">
+                            <span class="btn-text">
+                                <span class="btn-text-inner">Work</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="btn btn-link">
+                        <a href="../../about/" class="btn-click magnetic" data-strength="20"
+                            data-strength-text="10">
+                            <span class="btn-text">
+                                <span class="btn-text-inner">About</span>
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="btn btn-link">
+                        <a href="../../contact/" class="btn-click magnetic" data-strength="20" data-strength-text="10">
+                            <span class="btn-text">
+                                <span class="btn-text-inner">Contact</span>
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="btn btn-link btn-menu">
+                        <div class="btn-click magnetic" data-strength="20" data-strength-text="10">
+                            <div class="btn-text">
+                                <span class="btn-text-inner">Menu</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+        </div>
+        <div class="container medium once-in" style="position: relative; z-index: 1;">
+            <div class="row">
+                <div class="flex-col">
+                    <h1><span>Ciao! Surveys</span></h1>
+                </div>
+            </div>
+        </div>
+        </header>
+        <section class="section project-body" data-scroll-section style="padding-top: 0; padding-bottom: 0;">
+            <div class="container medium once-in">                <div class="row">
+                    <div class="flex-col">
+                        <p>Ciao! Surveys is a platform for personality and beliefs surveys, built under the Ciao! umbrella.</p>
+                    </div>
+                </div>
+            </div>
+        </section>        <section class="section project-body" data-scroll-section style="padding-top: 3.2em; padding-bottom: 0;">
+            <div class="container medium">
+                <div class="row" style="padding-bottom: 2.2em;">
+                    <div class="flex-col">
+                        <h2>Project</h2>
+                    </div>
+                </div>
+                <div class="row project-meta-row">
+                    <div class="flex-col">
+                        <p class="section-label">01</p>
+                        <div class="stripe"></div>
+                        <h4>Role</h4>
+                        <ul>
+                            <li>Co-Founder,</li>
+                            <li>Engineering.</li>
+                        </ul>
+                    </div>
+                    <div class="flex-col">
+                        <p class="section-label">02</p>
+                        <div class="stripe"></div>
+                        <h4>Services</h4>
+                        <ul>
+                            <li>Software Engineering,</li>
+                            <li>Data Science.</li>
+                        </ul>
+                    </div>
+                    <div class="flex-col">
+                        <p class="section-label">03</p>
+                        <div class="stripe"></div>
+                        <h4>Year</h4>
+                        <ul>
+                            <li>2026.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section project-body" data-scroll-section style="padding-top: 1.6em; padding-bottom: 0;">
+            <div class="container medium once-in">                <div class="row">
+                    <div class="flex-col project-note">
+                        <span class="project-note-icon"><img src="../../assets/img/projects/decor/survey-doc-icon.svg" alt="" loading="lazy"></span>
+                        <p>The main survey runs 181 short prompts, one at a time. Statements such as "I rarely worry" or "I take charge", each rated on a six point accuracy scale, with progress tracked while you answer.</p>
+                    </div>
+                </div>
+                <div class="row project-figure">
+                    <div class="flex-col">
+                        <img src="../../assets/img/projects/ciao-surveys-01.webp" alt="Ciao! Surveys running on a laptop" loading="lazy">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="flex-col">
+                        <p>Answers feed a dashboard of trait scores. Every score is placed against the range where most people fall, so you can tell whether a 42 on Openness is genuinely high or merely ordinary. Three frameworks are covered: NEO, HEXACO and MPQ.</p>
+                    </div>
+                </div>
+                <div class="row project-figure">
+                    <div class="flex-col">
+                        <img src="../../assets/img/projects/ciao-surveys-02.webp" alt="The survey and the personality dashboard" loading="lazy">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="flex-col project-note">
+                        <span class="project-note-icon"><img src="../../assets/img/projects/decor/survey-app-icon.svg" alt="" loading="lazy"></span>
+                        <p>The last step is conversation. Once your scores exist you can ask Ciao! about them: what low Extraversion looks like in practice, how two traits interact, what moved since the previous run. The code is public on GitHub.</p>
+                    </div>
+                </div>
+            </div>
+        </section>        <section class="section" data-scroll-section style="padding-top: 3.2em;">
+            <div class="container medium">
+                <div class="row" style="justify-content: center;">
+                    <div class="flex-col" style="display: flex; justify-content: center;">
+                        <div class="btn btn-normal">
+                            <a href="https://platform.ciaobang.com" target="_blank" rel="noopener" class="btn-click magnetic"
+                                data-strength="25" data-strength-text="15">
+                                <div class="btn-fill"></div>
+                                <span class="btn-text">
+                                    <span class="btn-text-inner change">Visit platform.ciaobang.com</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>        <div class="footer-rounded-div" data-scroll-section>
+            <div class="rounded-div-wrap">
+                <div class="rounded-div"></div>
+            </div>
+        </div>
+        <div class="footer-wrap footer-footer-wrap theme-dark" data-scroll-section>
+            <footer class="section footer" data-scroll data-scroll-speed="-4" data-scroll-position="bottom">
+                <div class="container medium">
+                    <div class="row">
+                        <div class="flex-col">
+                            <div class="arrow">
+                                <svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <title>arrow-up-right</title>
+                                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="Artboard" transform="translate(-1019.000000, -279.000000)"
+                                            stroke="#FFFFFF" stroke-width="1.5">
+                                            <g id="arrow-up-right"
+                                                transform="translate(1026.000000, 286.000000) rotate(90.000000) translate(-1026.000000, -286.000000) translate(1020.000000, 280.000000)">
+                                                <polyline id="Path" points="2.76923077 0 12 0 12 9.23076923"></polyline>
+                                                <line x1="12" y1="0" x2="0" y2="12" id="Path"></line>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <h2 class="footer-heading">
+                                    <div class="profile-picture-bw footer-cover"></div>
+                                    <div class="footer-text">
+                                        <span>Let’s work</span>
+                                        <span>together</span>
+                                    </div>
+                                </h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="flex-col">
+                            <div class="stripe"></div>
+                            <div class="btn-fixed">
+                                <div class="btn btn-round" data-scroll data-scroll-speed="-1"
+                                    data-scroll-direction="horizontal" data-scroll-position="bottom"
+                                    data-scroll-offset="-50%, 0">
+                                    <a href="../../contact/" class="btn-click magnetic " data-strength="100"
+                                        data-strength-text="50">
+                                        <div class="btn-fill"></div>
+                                        <span class="btn-text">
+                                            <span class="btn-text-inner">Get in touch</span>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="flex-col">
+                            <div class="btn btn-normal">
+                                <a href="mailto:ippolitimattia@gmail.com" class="btn-click magnetic" data-strength="25"
+                                    data-strength-text="15">
+                                    <div class="btn-fill"></div>
+                                    <span class="btn-text">
+                                        <span class="btn-text-inner change">ippolitimattia@gmail.com</span>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container no-padding">
+                    <div class="row bottom-footer">
+                        <div class="flex-col">
+                            <div class="credits">
+                                <p class="section-label">Version</p>
+                                <p>2026 © Edition</p>
+                            </div>
+                            <div class="time">
+                                <p class="section-label">Local time</p>
+                                <p><span id="timeSpan">09:41 PM CET</span></p>
+                            </div>
+                        </div>
+                        <div class="flex-col">
+                            <div class="goodbye">
+                                <p class="section-label">Greetings</p>
+                                <p>made in Italy (Abruzzo 🍢) with ❤️</p>
+                            </div>
+                        </div>
+                        <div class="flex-col">
+                            <div class="socials">
+                                <p class="section-label">Socials</p>
+                                <ul>
+                                    <li class="btn btn-link btn-link-external">
+                                        <a href="https://github.com/MattiaIppoliti" target="_blank"
+                                            class="btn-click magnetic" data-strength="20" data-strength-text="10">
+                                            <span class="btn-text">
+                                                <span class="btn-text-inner">Github</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="btn btn-link btn-link-external">
+                                        <a href="https://www.researchgate.net/profile/Mattia-Ippoliti" target="_blank"
+                                            class="btn-click magnetic" data-strength="20" data-strength-text="10">
+                                            <span class="btn-text">
+                                                <span class="btn-text-inner">ResearchGate</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="btn btn-link btn-link-external">
+                                        <a href="https://www.linkedin.com/in/mattiaippoliti" target="_blank"
+                                            class="btn-click magnetic" data-strength="20" data-strength-text="10">
+                                            <span class="btn-text">
+                                                <span class="btn-text-inner">LinkedIn</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="stripe"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <div class="overlay overlay-gradient"></div>
+        </div>
+        </div>
+    </main>
+    <script defer src="../../assets/js/app.70259f21.min.js"></script>
+
+
+    <!-- Vercel Speed Insights -->
+    <script>
+      window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+
+</html>
