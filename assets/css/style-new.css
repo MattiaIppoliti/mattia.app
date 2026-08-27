@@ -59,6 +59,7 @@ html.touch-device main .main-wrap {
     z-index: 10000;
     transform: scale(1);
     transform-origin: 50% 50%; /* Center the scaling */
+    pointer-events: none; /* must never swallow wheel/click events meant for the page */
 }
 
 @media screen and (max-width: 720px) {
@@ -326,6 +327,34 @@ html.touch-device main .main-wrap {
     opacity: 0;
     pointer-events: none;
     transform: translate(-50%, -1rem) scale(.96);
+}
+
+/* Floating variant: when the browser draws its own UI above the page
+   (iOS Safari with the top address bar, where safe-area-inset-top spans
+   the whole bar), the notch cannot sit flush with the display edge, so
+   the horn-shaped mask looks broken. Render it as a detached capsule. */
+.dynamic-notch.is-floating {
+    top: calc(var(--dynamic-notch-safe-top, 0px) + 10px);
+}
+
+.dynamic-notch.is-floating .dynamic-notch-surface {
+    -webkit-mask-image: none;
+    mask-image: none;
+    border-radius: 100px;
+}
+
+.dynamic-notch.is-floating.is-expanded .dynamic-notch-surface {
+    border-radius: 28px;
+}
+
+.dynamic-notch.is-floating .dynamic-notch-compact {
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+.dynamic-notch.is-floating.is-expanded .dynamic-notch-expanded {
+    padding-left: 24px;
+    padding-right: 24px;
 }
 
 .dynamic-notch-frame {

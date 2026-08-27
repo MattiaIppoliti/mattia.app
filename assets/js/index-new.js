@@ -556,6 +556,7 @@ function initPageTransitions() {
         scroll = new LocomotiveScroll({
             el: container.querySelector('[data-scroll-container]'),
             smooth: true,
+            scrollFromAnywhere: true,
         });
 
         if (window.__mattiaLocoResizeHandler) {
@@ -1704,6 +1705,20 @@ function initDynamicNotch() {
     shell.style.height = `${initialSizes.closedHeight}px`;
     body.appendChild(notch);
 
+    // When the browser paints its own UI above the page (iOS Safari top
+    // address bar), safe-area-inset-top spans that bar and the notch can't
+    // sit flush with the display edge — switch to the detached capsule look.
+    const syncFloatingMode = () => {
+        const probe = document.createElement('div');
+        probe.style.cssText = 'position:fixed;top:env(safe-area-inset-top,0px);left:0;width:1px;height:1px;visibility:hidden;pointer-events:none;';
+        body.appendChild(probe);
+        const safeTop = probe.getBoundingClientRect().top;
+        probe.remove();
+        notch.classList.toggle('is-floating', safeTop > 4);
+    };
+
+    syncFloatingMode();
+
     const formatter = new Intl.DateTimeFormat([], {
         timeZone: 'Europe/Amsterdam',
         hour: '2-digit',
@@ -1793,6 +1808,7 @@ function initDynamicNotch() {
     };
 
     const resizeNotch = () => {
+        syncFloatingMode();
         const sizes = getNotchSizes();
 
         if (isMobileNotchView()) {
