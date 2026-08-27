@@ -59,6 +59,7 @@ html.touch-device main .main-wrap {
     z-index: 10000;
     transform: scale(1);
     transform-origin: 50% 50%; /* Center the scaling */
+    pointer-events: none; /* must never swallow wheel/click events meant for the page */
 }
 
 @media screen and (max-width: 720px) {

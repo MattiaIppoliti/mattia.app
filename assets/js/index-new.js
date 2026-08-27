@@ -556,6 +556,7 @@ function initPageTransitions() {
         scroll = new LocomotiveScroll({
             el: container.querySelector('[data-scroll-container]'),
             smooth: true,
+            scrollFromAnywhere: true,
         });
 
         if (window.__mattiaLocoResizeHandler) {
