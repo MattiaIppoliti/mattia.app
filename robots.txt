@@ -1,3 +1,7 @@
 User-agent: *
 Allow: /
+
+# Keep internal/dev artifacts out of the index
+Disallow: /test-results/
+
 Sitemap: https://mattia.app/sitemap.xml
