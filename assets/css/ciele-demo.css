@@ -1,0 +1,21 @@
+.ciele-demo-video {
+    width: min(100%, 768px);
+    aspect-ratio: 768 / 820;
+    margin-inline: auto;
+    overflow: hidden;
+    border-radius: 1rem;
+    background: #171919;
+}
+
+.ciele-demo-video video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+@media (max-width: 540px) {
+    .ciele-demo-video {
+        border-radius: .75rem;
+    }
+}
