@@ -522,20 +522,31 @@
             </div>
         </section>
         <section class="section project-body" data-scroll-section style="padding-top: 1.6em; padding-bottom: 0;">
-            <div class="container medium once-in">                <div class="row">
-                    <div class="flex-col project-note">
-                        <span class="project-note-icon"><img width="34" height="57" src="../../assets/img/projects/decor/survey-doc-icon.svg" alt="" loading="lazy"></span>
-                        <p>The main survey runs 181 short prompts, one at a time. Statements such as "I rarely worry" or "I take charge", each rated on a six point accuracy scale, with progress tracked while you answer.</p>
-                    </div>
-                </div>
-                <div class="row project-figure">
+            <div class="container medium once-in">
+                <div class="row">
                     <div class="flex-col">
-                        <img src="../../assets/img/projects/ciao-surveys-01.webp" alt="Surveys AI Platform running on a laptop" loading="lazy">
+                        <p>Most personality tests online fall into two piles. One is entertainment with a paywall at the results page. The other is a PDF from 2010 with an appendix of item keys and no way to actually take the thing. I wanted the instrument from the second pile with the experience of the first, and I wanted the scoring to be auditable rather than trusted. That was the starting point for Ciao in late April 2026: a single web app where you answer real research items, get scored against published keys, and can then interrogate the result in plain language.</p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="flex-col">
-                        <p>Answers feed a dashboard of trait scores. Every score is placed against the range where most people fall, so you can tell whether a 42 on Openness is genuinely high or merely ordinary. Three frameworks are covered: NEO, HEXACO and MPQ.</p>
+                        <p>The constraints were mine to pick and they shaped everything. Solo build, no research budget, no license fees, so every instrument had to be public domain or openly licensable. No clinical claims, because I am not running a clinical study. And the scoring had to be verifiable by someone who does not trust me, which turned out to be the most useful constraint of the three.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="flex-col project-note">
+                        <span class="project-note-icon"><img width="34" height="57" src="../../assets/img/projects/decor/survey-doc-icon.svg" alt="" loading="lazy"></span>
+                        <p>Personality uses the AMBI battery from Yarkoni (2010), 181 items that score into 203 scales across eight established inventories, including NEO PI-R, HEXACO, MPQ, CPI and HPI. Transcribing 203 keying rows by hand is exactly the kind of work where a single reversed item slips through and nobody notices for a year. So the keying table is not the source of truth on its own. A test suite diffs every item prompt and every scale key against fixtures built from Appendix A and Appendix B of the paper, including the places where the paper's own summary table contradicts its appendix, which are recorded as documented conflicts rather than silently smoothed over. A typo in a keying row fails the build. The values and beliefs survey works the same way, 156 items covering the Portrait Values Questionnaire and the Primals Inventory, with its own audit test.</p>
+                    </div>
+                </div>
+                <div class="row project-figure">
+                    <div class="flex-col">
+                        <img src="../../assets/img/projects/ciao-surveys-01.webp" alt="The Surveys AI Platform questionnaire running on a laptop, one item at a time on a six point accuracy scale" loading="lazy">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="flex-col">
+                        <p>Two separate scoring engines produce results for those two surveys, and two engines drift. The band thresholds, the percentile bounds, the comparison-group wording and the mapping from a 1-6 answer onto a 0-50 score all live in one shared module that both engines import, so a change to how a score is described happens once or not at all.</p>
                     </div>
                 </div>
                 <div class="row project-figure">
@@ -600,7 +611,22 @@
                 <div class="row">
                     <div class="flex-col project-note">
                         <span class="project-note-icon"><img width="34" height="31" src="../../assets/img/projects/decor/survey-app-icon.svg" alt="" loading="lazy"></span>
-                        <p>The last step is conversation. Once your scores exist you can ask Ciao! about them: what low Extraversion looks like in practice, how two traits interact, what moved since the previous run. The code is public on GitHub.</p>
+                        <p>The part people actually use is the chat. Your profile is loaded into the assistant's context as a compact structured summary, so you can ask what a high score on one scale means for how you work with other people and get an answer about your numbers instead of a definition. It retrieves from the same documentation the site publishes, chunked and embedded into pgvector, retrieved with query rewriting personalised by your profile and reranked locally with MMR. No external reranking service. What you read in the docs and what the assistant tells you cannot diverge, because they are the same text. Model access is bring-your-own-key, and I wrote that down as a decision record: the retrieval tool only registers when you have supplied a Google key, so embedding costs sit with whoever brought the key. Chat is stored pseudonymously against an HMAC of the user id with PII redacted before it hits Postgres.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="flex-col">
+                        <p>The architecture got simpler by deletion, not addition. Ciao started as three Next.js apps on three subdomains talking over an HMAC-signed internal endpoint with a CORS allowlist and a secret fallback chain. In June I merged them into one app on one host. The signed endpoint, the allowlist, both HTTP clients and four environment variables were deleted, and the chat now loads survey context with a function call in the same process. One auth surface, one Vercel project, one deployment.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="flex-col">
+                        <p>Not everything landed. I tried Next 16's cacheComponents with PPR twice for the authenticated dashboard, and reverted twice. Vercel's ISR cache was storing the full authenticated response and serving it across users, with the age header climbing and no cookie variance. That is a data leak, not a performance regression, and the fix is not clever caching. Every auth-gated page is force-dynamic and every per-user API route sends no-store, which costs me the static win and is the right trade. The performance work that did ship is duller: lazy-loading the assist widget, a hint cookie, cached distribution queries.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="flex-col">
+                        <p>Where it stands today: the platform is live, roughly 31,000 lines of TypeScript across the app and four internal packages, 36 test files, and public documentation explaining every scale and how it is computed. The honest caveat is on the response plots. The violin curves that show where your answer falls against other people are seeded synthetic distributions, not real respondents, and they stay that way per scale until at least 30 real submissions exist. That is written on the page rather than buried, which felt like the only defensible option for a project whose whole argument is that the scoring should be checkable.</p>
                     </div>
                 </div>
             </div>
