@@ -154,6 +154,52 @@
         <style>
             .project-hero { position: relative; overflow: hidden; }
             .project-decor { position: absolute; inset: 0; pointer-events: none; }
+            /* The site's Ask LAI! bar, floated as hero decor the way the other
+               case studies float their product artwork. Same capsule as the
+               ask bar in the Surveys mock; the tilt marks it as decoration. */
+            .luiss-askbar {
+                position: absolute; right: 5%; top: 46%;
+                display: flex; align-items: center; gap: .6em;
+                width: min(19rem, 52%); height: 3rem;
+                padding: 0 .5em 0 1.25em; border-radius: 1rem;
+                font-size: 1rem;
+                border: 1px solid rgba(218, 212, 200, .9);
+                background: rgba(159, 155, 147, .16);
+                backdrop-filter: blur(40px) saturate(2);
+                -webkit-backdrop-filter: blur(40px) saturate(2);
+                box-shadow: 0 12px 28px -14px rgba(0, 0, 0, .22);
+                transform: rotate(-4deg);
+            }
+            .luiss-askbar-input { flex: 1 1 auto; font-size: .82em; color: #55534e; }
+            .luiss-askbar kbd {
+                font: inherit; font-size: .62em; color: #6f6d67;
+                border: 1px solid #dad4c8; background: rgba(255, 255, 255, .6);
+                border-radius: 4px; padding: .25em .5em;
+            }
+            .luiss-askbar-go {
+                display: flex; align-items: center; justify-content: center;
+                width: 1.75rem; height: 1.75rem; border-radius: 50%;
+                border: 1px solid #dad4c8;
+                background: rgba(255, 255, 255, .72); color: #000;
+            }
+            .luiss-askbar-go svg { width: .875rem; height: .875rem; }
+            @media (prefers-reduced-transparency: reduce) {
+                .luiss-askbar {
+                    background: #ecebe8;
+                    backdrop-filter: none; -webkit-backdrop-filter: none;
+                }
+            }
+            @media (prefers-contrast: more) {
+                .luiss-askbar {
+                    background: #ecebe8; border-color: #55534e;
+                    backdrop-filter: none; -webkit-backdrop-filter: none;
+                }
+                .luiss-askbar kbd, .luiss-askbar-go { border-color: #55534e; }
+                .luiss-askbar kbd, .luiss-askbar-input { color: #000; }
+            }
+            @media (max-width: 767px) {
+                .luiss-askbar { right: 6%; top: auto; bottom: 12%; width: min(17rem, 78%); }
+            }
             .project-body .row { padding-top: 1.6em; }
             .project-body .row:first-child { padding-top: 0; }
             /* Copy runs to the same width as the figures rather than
@@ -288,7 +334,15 @@
         </div>
         <div class="main-wrap" data-scroll-container>
             <header class="section default-header project-hero" data-scroll-section>
-                                <div class="nav-bar">
+                <div class="project-decor" aria-hidden="true">
+                    <div class="luiss-askbar">
+                        <span class="luiss-askbar-input">Ask LAI!</span>
+                        <kbd>Ctrl+I</kbd>
+                        <span class="luiss-askbar-go">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </span>
+                    </div>
+                </div>                <div class="nav-bar">
                     <div class="credits-top">
                         <div class="btn btn-link btn-left-top">
                            <a href="../../" class="btn-click magnetic" data-strength="20"
