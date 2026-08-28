@@ -387,7 +387,7 @@
         <section class="section project-body" data-scroll-section style="padding-top: 0; padding-bottom: 0;">
             <div class="container medium once-in">                <div class="row">
                     <div class="flex-col">
-                        <p>Ciele gives an organization AI Teammates that answer from its own knowledge. You build an assistant on the platform, connect the documentation and policies it should read, test it against real questions, then publish it as a help desk, a widget on your site, or an internal tool.</p>
+                        <p>One knowledge base, two kinds of agents, no enterprise contract.</p>
                     </div>
                 </div>
             </div>
@@ -430,7 +430,18 @@
             </div>
         </section>
         <section class="section project-body" data-scroll-section style="padding-top: 1.6em; padding-bottom: 0;">
-            <div class="container medium">                <div class="row project-figure">
+            <div class="container medium">
+                <div class="row">
+                    <div class="flex-col">
+                        <p>The market for AI assistants over company knowledge splits into two camps that don't talk to each other. On one side, customer-facing products like Intercom's Fin: you connect your help content, a widget appears on your site, and you pay around $0.99 per resolved conversation on top of seat fees. On the other, internal tools like Dust, Glean, or Onyx: employees ask questions over Salesforce, ServiceNow, Google Drive, Slack, and internal documents, but nothing faces a customer. A few products bridge the two, eesel AI being the closest, yet even there the internal side is a Q&amp;A bot in Slack. In none of them are the internal agents actors: colleagues with a domain, permissions, and the ability to do things inside the platform itself. And none of the dual-sided ones can be self-hosted.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="flex-col">
+                        <p>That gap annoyed me enough to build the missing product, and to test a second question at the same time: whether one person, working with AI coding agents, could take it to production standard rather than demo standard. The target was a multi-tenant SaaS where an organization connects its knowledge once, crawled websites, uploaded files, curated FAQs, third-party applications, and spends it twice. Outward, as publishable chat widgets with citations. Inward, as AI teammates that members chat with in the console, each specialized in a domain, each holding explicit grants for what it may touch: filing an improvement ticket, triaging feedback on a schedule, searching a scoped slice of the knowledge. To keep myself honest I mapped the entire functional surface of a live commercial platform, every screen, field, and limit, into a parity table that became the backlog. Clone the functionality where it existed, extend it where it didn't, and treat “it mostly works” as not working.</p>
+                    </div>
+                </div>
+                <div class="row project-figure">
                     <div class="flex-col">
                         <img src="../../assets/img/projects/ciele-01.webp" alt="The Ciele landing page and platform" loading="lazy">
                     </div>
@@ -438,7 +449,22 @@
                 <div class="row">
                     <div class="flex-col project-note">
                         <span class="project-note-icon project-note-icon-lg" style="opacity: 1;"><img width="34" height="30" src="../../assets/img/projects/decor/ciele-ghost.svg" alt="" loading="lazy"></span>
-                        <p>The platform covers a teammate's full lifecycle: knowledge sources, conversation flows, tools and skills, goals, an inbox of live conversations, and insights into what people actually ask. Answers cite the pages they came from, so a wrong answer can be traced instead of guessed at.</p>
+                        <p>The architecture decisions did most of the work. The monorepo has 14 workspaces with enforced boundaries, not suggested ones. The domain vocabulary lives in a zero-dependency package. The data layer is one Db interface with 200+ methods and two implementations, a Supabase one scoped by Postgres row-level security and an in-memory mock, both run against the same contract suite, so the app boots on demo data with no database configured. The LLM runtime is framework-free by construction: its exports map has three entries, so a deep import into its internals does not resolve. Every message routes through a rule engine before any model generates a word, so a verbatim answer stays verbatim and a generative one carries source-level citations. The teammates layer is where the governance lives: action grants per domain with absence meaning refusal, a capability ceiling per teammate, scheduled routines that run through the same turn pipeline a human would use, and group channels where mentioning a teammate is the only way to activate it.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="flex-col">
+                        <p>Working with agents changed how I write infrastructure: everything is a gate rather than a convention. CI runs typecheck, test, lint, and build, affected-only on pull requests and full on pushes, because an unresolvable comparison base would otherwise skip everything silently. Migrations reach production through a filename-ledger applier with a nightly catch-up, never by hand. A mirror gate assembles the open-source edition on every push and fails the build if enterprise code leaks into it. Releases cut themselves from a nightly cron; the previous per-merge setup produced 85 releases in 20 days and burned a third of the month's CI minutes repackaging an unchanged desktop app. One lesson stuck. Three drift tests agreed that a route, a CLI verb, and an MCP tool shared a name, and all three passed while every endpoint threw on its first real call, because none of them executed anything. The fix was a test that runs each exposed operation for real. Names agreeing is not the same as code working.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="flex-col">
+                        <p>Some detours were expensive. The self-host compose file failed its release smoke test nine times because Docker Compose interpolates credential guards before filtering by profile; two workers moved into an overlay file nobody lists by default, and the stack boots. Migrating to TypeScript's native compiler cut a cold typecheck of all workspaces from 5m17s to about 18 seconds, at the cost of running two compilers side by side because the linter still needs the old API.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="flex-col">
+                        <p>Today the platform runs at ciele.app, with the open-source mirror publishing nightly and a Docker Compose bundle for anyone who wants the whole thing on their own hardware, which is the option the incumbents don't offer. The parity table shows most of the reference surface done or partial, plus the layer the reference never had: teammates, grants, routines, channels, a versioned API, a CLI, and an MCP server so external agents can drive the platform too. What I'd tell a recruiter is not that I wrote all of it by hand; agents wrote a lot of it. What I did was make that safe: fixed vocabulary, deep modules behind narrow interfaces, and a CI that refuses quietly wrong work. That turns out to be the actual job.</p>
                     </div>
                 </div>
             </div>
