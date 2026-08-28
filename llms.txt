@@ -10,6 +10,7 @@
 - [Ciao!](https://mattia.app/work/ciao/): software collective co-founded by Mattia, building digital products for partners end to end
 - [Surveys AI Platform](https://mattia.app/work/ciao-surveys/): personality and beliefs survey platform with 181 prompts and trait dashboards across NEO, HEXACO and MPQ
 - [Ciele](https://mattia.app/work/ciele/): self-hostable platform for AI Teammates that answer from an organization's own knowledge
+- [Luiss.edu](https://mattia.app/work/luiss/): rebuilt university website with an owned hybrid search engine and an agentic RAG assistant that answers with citations
 - [Accomplishments](https://mattia.app/accomplishments/): certifications and milestones
 - [Contact](https://mattia.app/contact/): how to get in touch
 

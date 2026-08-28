@@ -170,6 +170,23 @@
             .project-note-icon svg, .project-note-icon img { width: 34px; max-width: 34px; height: auto; display: block; }
             .project-note-icon-lg, .project-note-icon-lg img { width: 46px; max-width: 46px; }
             .project-note p { flex: 1 1 auto; }
+
+            /* Tracking is size-specific, so one value cannot be right at every
+               size. The 78px h1 and 48px h2 were set at 0 and read loose; the
+               9.6px label already carries +0.05em, which is correct for it. */
+            .project-hero h1 { letter-spacing: -0.022em; }
+            .project-body h2, .project-hero h2 { letter-spacing: -0.018em; }
+            .project-meta-row h4 { letter-spacing: -0.008em; line-height: 1.25; }
+
+            /* Press feedback belongs on pointer-down, not on release. The
+               magnetic script owns the inline transform on .btn-click, so the
+               press scale goes on the wrapper, which nothing else touches. */
+            .btn-normal { transition: transform 140ms cubic-bezier(.2, .7, .3, 1); }
+            .btn-normal:active { transform: scale(.97); }
+            @media (prefers-reduced-motion: reduce) {
+                /* Keep the feedback, drop the travel: it lands instantly. */
+                .btn-normal { transition: none; }
+            }
             @media (max-width: 767px) {
                 .project-meta-row .flex-col { width: 100%; padding-right: 0; margin-bottom: 2.6em; }
                 .project-note-icon, .project-note-icon svg, .project-note-icon img { width: 26px; max-width: 26px; }

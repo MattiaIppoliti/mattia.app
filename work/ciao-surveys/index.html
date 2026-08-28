@@ -175,6 +175,23 @@
             .project-note-icon svg, .project-note-icon img { width: 34px; max-width: 34px; height: auto; display: block; }
             .project-note-icon-lg, .project-note-icon-lg img { width: 46px; max-width: 46px; }
             .project-note p { flex: 1 1 auto; }
+
+            /* Tracking is size-specific, so one value cannot be right at every
+               size. The 78px h1 and 48px h2 were set at 0 and read loose; the
+               9.6px label already carries +0.05em, which is correct for it. */
+            .project-hero h1 { letter-spacing: -0.022em; }
+            .project-body h2, .project-hero h2 { letter-spacing: -0.018em; }
+            .project-meta-row h4 { letter-spacing: -0.008em; line-height: 1.25; }
+
+            /* Press feedback belongs on pointer-down, not on release. The
+               magnetic script owns the inline transform on .btn-click, so the
+               press scale goes on the wrapper, which nothing else touches. */
+            .btn-normal { transition: transform 140ms cubic-bezier(.2, .7, .3, 1); }
+            .btn-normal:active { transform: scale(.97); }
+            @media (prefers-reduced-motion: reduce) {
+                /* Keep the feedback, drop the travel: it lands instantly. */
+                .btn-normal { transition: none; }
+            }
             @media (max-width: 767px) {
                 .project-meta-row .flex-col { width: 100%; padding-right: 0; margin-bottom: 2.6em; }
                 .project-note-icon, .project-note-icon svg, .project-note-icon img { width: 26px; max-width: 26px; }
@@ -272,6 +289,28 @@
                 background: rgba(255, 255, 255, .72); color: var(--ink);
             }
             .cs-askbar-go svg { width: .875rem; height: .875rem; }
+
+            /* The mock mirrors the product's palette, but --muted (#9f9b93)
+               puts these two labels at 2.7:1 on this ground. The same hue at
+               70% value clears 4.5:1. Scoped to the text only, so the gauge
+               arcs and median dots still match the product exactly. */
+            .cs-gauge-iqr, .cs-askbar kbd { color: #6f6d67; }
+
+            /* The ask bar is the one translucent surface on these pages. */
+            @media (prefers-reduced-transparency: reduce) {
+                .cs-askbar {
+                    background: #ecebe8;
+                    backdrop-filter: none; -webkit-backdrop-filter: none;
+                }
+            }
+            @media (prefers-contrast: more) {
+                .cs-askbar {
+                    background: #ecebe8; border-color: var(--ink-soft);
+                    backdrop-filter: none; -webkit-backdrop-filter: none;
+                }
+                .cs-browser, .cs-panel, .cs-toggle, .cs-askbar kbd, .cs-askbar-go { border-color: var(--ink-soft); }
+                .cs-gauge-iqr, .cs-askbar kbd, .cs-askbar-input { color: var(--ink); }
+            }
             @media (max-width: 900px) {
                 .cs-gauge-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             }
@@ -281,31 +320,6 @@
                 .cs-browser-url { font-size: .62em; }
             }
 
-            /* Ciele hero clouds: slide in on load, then drift forever.
-               Ported from the hero-clouds component on ciele.app. */
-            .ciele-cloud-wrap { position: absolute; will-change: transform; }
-            .ciele-cloud-wrap-left { left: -6%; top: 16%; width: 40%; max-width: 560px;
-                animation: ciele-cloud-enter-left 1.2s cubic-bezier(0.22, 1, 0.36, 1); }
-            .ciele-cloud-wrap-right { right: -7%; top: 2%; width: 42%; max-width: 600px;
-                animation: ciele-cloud-enter-right 1.5s cubic-bezier(0.22, 1, 0.36, 1); }
-            .ciele-cloud { width: 100%; height: auto; display: block; opacity: .55;
-                animation: ciele-cloud-drift 14s ease-in-out infinite alternate; }
-            .ciele-cloud-slow { animation-duration: 22s; animation-delay: -6s; }
-            @keyframes ciele-cloud-enter-left {
-                from { transform: translate3d(-120%, -35%, 0); }
-                to { transform: translate3d(0, 0, 0); }
-            }
-            @keyframes ciele-cloud-enter-right {
-                from { transform: translate3d(120%, -35%, 0); }
-                to { transform: translate3d(0, 0, 0); }
-            }
-            @keyframes ciele-cloud-drift {
-                from { transform: translateX(-1.5%); }
-                to { transform: translateX(1.5%); }
-            }
-            @media (prefers-reduced-motion: reduce) {
-                .ciele-cloud, .ciele-cloud-wrap { animation: none; }
-            }
         </style>
         <div class="btn btn-hamburger">
             <div class="btn-click magnetic" data-strength="50" data-strength-text="25">

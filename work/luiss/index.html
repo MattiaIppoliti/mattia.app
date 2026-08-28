@@ -20,16 +20,16 @@
         })();
     </script>
 
-    <title>Ciao! | Mattia Ippoliti</title>
+    <title>Luiss.edu | Mattia Ippoliti</title>
     <meta name="description"
-        content="Ciao! is a software collective co-founded by Mattia Ippoliti. It builds digital products for partners end to end, from design to shipped software.">
+        content="Rebuilding Luiss.edu: 66,000 pages cut to 23,000, a university-owned hybrid search engine, and an agentic RAG assistant that answers with citations.">
     <meta name="robots" content="index, follow">
 
-    <meta property="og:url" content="https://mattia.app/work/ciao/">
-    <meta property="og:title" content="Ciao! | Mattia Ippoliti">
+    <meta property="og:url" content="https://mattia.app/work/luiss/">
+    <meta property="og:title" content="Luiss.edu | Mattia Ippoliti">
     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
     <meta property="og:description"
-        content="Ciao! is a software collective co-founded by Mattia Ippoliti. It builds digital products for partners end to end.">
+        content="Rebuilding Luiss.edu and the AI search platform behind it: owned hybrid search plus an agentic RAG assistant with citations.">
     <meta property="og:site_name" content="Mattia Ippoliti" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://mattia.app/assets/img/og-profile.jpg">
@@ -39,15 +39,15 @@
     <meta property="og:locale" content="en_US">
 
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Ciao! | Mattia Ippoliti">
+    <meta name="twitter:title" content="Luiss.edu | Mattia Ippoliti">
     <meta name="twitter:description"
-        content="Ciao! is a software collective co-founded by Mattia Ippoliti. It builds digital products for partners end to end.">
+        content="Rebuilding Luiss.edu and the AI search platform behind it: owned hybrid search plus an agentic RAG assistant with citations.">
     <meta name="twitter:image" content="https://mattia.app/assets/img/og-profile.jpg">
     <meta name="twitter:image:alt" content="Mattia Ippoliti, software engineer in Rome, Italy">
 
     <meta name="theme-color" content="#1C1D20">
 
-    <link rel="canonical" href="https://mattia.app/work/ciao/">
+    <link rel="canonical" href="https://mattia.app/work/luiss/">
     <link rel="preload" href="../../assets/fonts/UncutSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="../../assets/fonts/UncutSans-Bold.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="../../assets/fonts/Gulax-Regular.woff2" as="font" type="font/woff2" crossorigin>
@@ -80,21 +80,21 @@
         },
         {
           "@type": "WebPage",
-          "@id": "https://mattia.app/work/ciao/#webpage",
-          "url": "https://mattia.app/work/ciao/",
-          "name": "Ciao! | Mattia Ippoliti",
-          "description": "Ciao! is a software collective co-founded by Mattia Ippoliti. It builds digital products for partners end to end.",
+          "@id": "https://mattia.app/work/luiss/#webpage",
+          "url": "https://mattia.app/work/luiss/",
+          "name": "Luiss.edu | Mattia Ippoliti",
+          "description": "Rebuilding Luiss.edu: 66,000 pages cut to 23,000, a university-owned hybrid search engine, and an agentic RAG assistant that answers with citations.",
           "isPartOf": { "@id": "https://mattia.app/#website" },
           "author": { "@id": "https://mattia.app/#person" },
           "inLanguage": "en"
         },
         {
           "@type": "BreadcrumbList",
-          "@id": "https://mattia.app/work/ciao/#breadcrumb",
+          "@id": "https://mattia.app/work/luiss/#breadcrumb",
           "itemListElement": [
             { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mattia.app/" },
             { "@type": "ListItem", "position": 2, "name": "Work", "item": "https://mattia.app/work/" },
-            { "@type": "ListItem", "position": 3, "name": "Ciao!", "item": "https://mattia.app/work/ciao/" }
+            { "@type": "ListItem", "position": 3, "name": "Luiss.edu", "item": "https://mattia.app/work/luiss/" }
           ]
         }
       ]
@@ -132,9 +132,11 @@
                 </h2>
                 <h2>Work<div class="dot"></div>
                 </h2>
-                <h2 class="active">Ciao!<div class="dot"></div>
+                <h2>Ciao!<div class="dot"></div>
                 </h2>
                 <h2>Surveys AI Platform<div class="dot"></div>
+                </h2>
+                <h2 class="active">Luiss<div class="dot"></div>
                 </h2>
                 <h2>Ciele<div class="dot"></div>
                 </h2>
@@ -148,7 +150,7 @@
             </div>
         </div>
     </div>
-    <main class="main" id="project-ciao" data-barba="container" data-barba-namespace="project-ciao">
+    <main class="main" id="project-luiss" data-barba="container" data-barba-namespace="project-luiss">
         <style>
             .project-hero { position: relative; overflow: hidden; }
             .project-decor { position: absolute; inset: 0; pointer-events: none; }
@@ -187,55 +189,7 @@
                 /* Keep the feedback, drop the travel: it lands instantly. */
                 .btn-normal { transition: none; }
             }
-            /* Horizontal strip. The section is exactly one viewport tall plus the
-               image's overhang, so the extra scroll distance equals the distance
-               the image has to travel. horizontal-strip.js holds the frame still
-               over that stretch and slides the image by the same number of pixels
-               the page scrolled, 1:1 - so reaching the strip turns the scroll
-               sideways, and vertical scrolling resumes once the far edge lands. */
-            .h-strip {
-                --strip-ratio: 8.0014;                              /* 11250 / 1406 */
-                --strip-h: calc(var(--vh, 1vh) * 62);
-                /* The frame is only a little taller than the picture. A full
-                   100vh frame letterboxed it by 19vh a side, which read as a
-                   slab of empty white under the label on the way in. */
-                --strip-frame: calc(var(--vh, 1vh) * 72);
-                --strip-w: calc(var(--strip-h) * var(--strip-ratio));
-                --strip-travel: max(0px, calc(var(--strip-w) - 100vw));
-                position: relative; padding: 0 !important; overflow: hidden;
-                height: calc(var(--strip-frame) + var(--strip-travel));
-                /* The section is a whole screen taller than the frame that
-                   travels through it. Without a ground of its own the part the
-                   frame is not covering shows the dark body background, which
-                   during the pin means a black band above and below the
-                   picture. It has to carry the page's own white. */
-                background: #fff;
-            }
-            .h-strip-viewport {
-                height: var(--strip-frame);
-                display: flex; align-items: center; overflow: hidden;
-            }
-            .h-strip-track { display: flex; }
-            /* Promoting the track costs a layer the width of the picture, near
-               12 MB at this size, so it is only paid for while the strip is in
-               play. horizontal-strip.js adds .is-live as it comes into range. */
-            .h-strip.is-live .h-strip-viewport,
-            .h-strip.is-live .h-strip-track { will-change: transform; }
-            .h-strip-img { height: var(--strip-h); width: var(--strip-w); max-width: none; display: block; border-radius: 14px; }
-            /* No pin without a pointer, or when motion is unwelcome: the strip
-               collapses to its natural height and pans by native swipe instead. */
-            html.touch-device .h-strip { height: auto; }
-            html.touch-device .h-strip-viewport { height: auto; padding: 5vh 0; overflow-x: auto; -webkit-overflow-scrolling: touch; transform: none !important; }
-            html.touch-device .h-strip-track { transform: none !important; padding-left: 0; }
-            html.touch-device .h-strip-img { height: 40vh; width: auto; }
-            @media (prefers-reduced-motion: reduce) {
-                .h-strip { height: auto; }
-                .h-strip-viewport { height: auto; padding: 5vh 0; overflow-x: auto; transform: none !important; }
-                .h-strip-track { transform: none !important; }
-                .h-strip-img { height: 40vh; width: auto; }
-            }
             @media (max-width: 767px) {
-                .h-strip-img { height: 34vh; }
                 .project-meta-row .flex-col { width: 100%; padding-right: 0; margin-bottom: 2.6em; }
                 .project-note-icon, .project-note-icon svg, .project-note-icon img { width: 26px; max-width: 26px; }
             }
@@ -334,12 +288,7 @@
         </div>
         <div class="main-wrap" data-scroll-container>
             <header class="section default-header project-hero" data-scroll-section>
-                <div class="project-decor" aria-hidden="true">
-                    <img src="../../assets/img/projects/decor/ciao-sparkle.svg" alt="" loading="lazy"
-                        style="position:absolute; right:6%; top:14%; width:24%; max-width:320px; opacity:.12; transform:rotate(8deg);">
-                    <img src="../../assets/img/projects/decor/ciao-sparkle.svg" alt="" loading="lazy"
-                        style="position:absolute; left:3%; bottom:8%; width:16%; max-width:210px; opacity:.09; transform:rotate(-14deg) scaleX(-1);">
-                </div>                <div class="nav-bar">
+                                <div class="nav-bar">
                     <div class="credits-top">
                         <div class="btn btn-link btn-left-top">
                            <a href="../../" class="btn-click magnetic" data-strength="20"
@@ -392,7 +341,7 @@
         <div class="container medium once-in" style="position: relative; z-index: 1;">
             <div class="row">
                 <div class="flex-col">
-                    <h1><span>Ciao!</span></h1>
+                    <h1><span>Luiss.edu</span></h1>
                 </div>
             </div>
         </div>
@@ -400,12 +349,7 @@
         <section class="section project-body" data-scroll-section style="padding-top: 0; padding-bottom: 0;">
             <div class="container medium once-in">                <div class="row">
                     <div class="flex-col">
-                        <p>Ciao! is a software collective I co-founded in 2024. We design and build digital products for partners from end to end: research, interface design, engineering, and the unglamorous part where the thing actually ships and keeps running.</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="flex-col">
-                        <p>The homepage states the brief without decoration: say Ciao! to ordinary software. Small team, direct contact (partners write to us on Slack instead of filing a ticket), and one visual identity carried across everything we publish.</p>
+                        <p>Rebuilding the Luiss public website and the AI search platform behind it: the site cut from 66,000 pages to what people actually read, Google custom search replaced with an engine the university owns and can tune, and a conversational assistant on top that answers with citations back to the source page.</p>
                     </div>
                 </div>
             </div>
@@ -422,9 +366,8 @@
                         <div class="stripe"></div>
                         <h4>Role</h4>
                         <ul>
-                            <li>Co-Founder,</li>
-                            <li>Engineering,</li>
-                            <li>Product.</li>
+                            <li>Internal owner,</li>
+                            <li>AI &amp; Search.</li>
                         </ul>
                     </div>
                     <div class="flex-col">
@@ -432,9 +375,9 @@
                         <div class="stripe"></div>
                         <h4>Services</h4>
                         <ul>
-                            <li>Software Engineering,</li>
-                            <li>Interaction,</li>
-                            <li>Development.</li>
+                            <li>AI Engineering,</li>
+                            <li>Search,</li>
+                            <li>Compliance.</li>
                         </ul>
                     </div>
                     <div class="flex-col">
@@ -442,43 +385,70 @@
                         <div class="stripe"></div>
                         <h4>Year</h4>
                         <ul>
-                            <li>2025.</li>
+                            <li>2026.</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
         <section class="section project-body" data-scroll-section style="padding-top: 1.6em; padding-bottom: 0;">
-            <div class="container medium">                <div class="row project-figure">
+            <div class="container medium">
+                <div class="row">
                     <div class="flex-col">
-                        <img src="../../assets/img/projects/ciao-01.webp"
-                            alt="The Ciao! site on a laptop, mid build, reading still crafting, come back soon"
-                            width="1994" height="1496" loading="lazy" decoding="async">
+                        <p>The old university website had crossed 66,000 pages. Very little of that was intentional. Fifteen years of departmental autonomy had produced duplicated Italian and English versions of the same page, orphaned drafts nobody could trace back to an owner, expired calls for applications still sitting at live URLs, and long tails of news posts attached to course pages. Roughly nine out of ten substantive answers, the ones about admission deadlines, fees, scholarship rules, lived inside attached PDFs rather than in HTML.</p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="flex-col">
-                        <p>The client work spans web development, UX design and portfolio sites for people who need a presence built properly rather than assembled from a template. Next to that, Ciao! runs its own products. Surveys AI Platform grew out of the collective.</p>
+                        <p>Search made the problem visible to every visitor. The site used a Google custom search integration, so results reflected whatever Google had crawled and however Google chose to rank it. A prospective student typing “master in management in English” got a four year old press release before the programme page. Nobody at the university could tune that, or even see why a result ranked where it did. The search box was the most used element on the site and the one part of it we did not control.</p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="flex-col">
-                        <p>Ciao! is also a network. Members have shipped work at some of the best known companies in the world, and new people keep joining to learn and build alongside them.</p>
+                        <p>I worked on this as the internal owner on the Luiss side, alongside a design partner and an engineering vendor, covering the AI components, the technical review of the search engine, and the compliance track that ran in parallel. The goal was not a visual refresh. We had to shrink the content estate to what people actually read, replace Google with a search engine the university owns and can tune, and put a conversational assistant on top of it that answers in full sentences with citations back to the source page. All of it had to ship on one date, because a partial migration would have left two sites and two search behaviours running at once.</p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="flex-col">
-                        <p class="section-label">Scroll to walk through the site</p>
+                        <p>The content work came first and was the least glamorous part. Every page was classified as keep, merge, archive, or redirect, with the offices that owned the content doing the classification rather than a central team guessing. Anything cut stayed retrievable rather than deleted, which mattered for the internal politics as much as for the link equity.</p>
                     </div>
                 </div>
-            </div>
-        </section>
-        <section class="section h-strip" data-scroll-section>
-            <div class="h-strip-viewport">
-                <div class="h-strip-track">
-                    <img class="h-strip-img" src="../../assets/img/projects/ciao-scroll.webp"
-                        alt="One pass across the Ciao! site, from the hero to the network and the contact call to action"
-                        width="11250" height="1406" loading="lazy" decoding="async">
+                <div class="row">
+                    <div class="flex-col">
+                        <p>On the platform side, a crawler indexes site content, FAQ pages, and orientation material, and the index feeds hybrid search that combines keyword matching with vector similarity, so a query phrased the way a seventeen year old phrases it still reaches a page written in institutional Italian. We started on Typesense as the vector store, chosen deliberately to avoid provider lock in, and moved to Firestore before launch when the operational picture changed. The generation layer sits behind an LLM proxy so the provider stays switchable, and today runs on Claude Sonnet on Vertex AI in europe-west1, with the RAG index and conversation history in europe-west8 in Milan, which kept the data residency conversation short.</p>
+                    </div>
+                </div>
+                <div class="row project-figure">
+                    <div class="flex-col">
+                        <img src="../../assets/img/projects/luiss-search.webp" alt="The Luiss search module on a phone, offering suggested questions and frequent searches before anything is typed"
+                            width="2000" height="1500" loading="lazy" decoding="async">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="flex-col">
+                        <p>The conversational layer is an agentic RAG loop rather than a single retrieval pass. The agent first decides whether a message needs retrieval at all, since “hello” does not. If the question retrieves poorly it rewrites the query and tries again, and after several failed cycles it falls back to the user’s original wording rather than inventing an answer. Session context carries forward, so “and for France?” after a question about double degrees resolves correctly. One behavioural rule cost more discussion than any of the infrastructure. When a question is generic and the retrieved context spans undergraduate, graduate, and PhD pages, the assistant must not silently pick one. It answers generally and links all of the relevant official pages, clearly separated.</p>
+                    </div>
+                </div>
+                <div class="row project-figure">
+                    <div class="flex-col">
+                        <img src="../../assets/img/projects/luiss-assistant.webp" alt="The Luiss AI Search assistant answering a question about single courses, with a Fonte link back to the source page"
+                            width="2000" height="1500" loading="lazy" decoding="async">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="flex-col">
+                        <p>Ranking took three levers to become usable: weighting by content type, removing the recency bias that kept surfacing news over evergreen pages, and indexing the URI itself, which turned out to carry a lot of signal in a taxonomy as structured as a university’s.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="flex-col">
+                        <p>The compliance track ran alongside and gated the launch. A vulnerability assessment by an external firm closed with no findings, static analysis output was required from the vendor, and the AI Act impact and risk assessment classified the module as limited risk with transparency obligations, which is what a search assistant over public content should be. Conversational data masking was not ready, so we went live explicitly without it, restricted access to session context and to records carrying explicit user feedback, and reduced retention as an interim measure rather than pretending the control existed.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="flex-col">
+                        <p>The new site went live on 23 June 2026 with the search engine and the assistant integrated natively. Content dropped from more than 66,000 pages to around 23,000. Search is now ours, tunable in a working day rather than through a black box, and inference costs run at roughly twenty euro per day at current traffic. The change that will outlast the technology is governance. Every office is now accountable for its own pages, publication is centralised through one editorial team, and technical reports route through a ticketing queue instead of arriving as direct emails to whoever was in the last meeting.</p>
+                    </div>
                 </div>
             </div>
         </section>        <section class="section" data-scroll-section style="padding-top: 3.2em;">
@@ -486,11 +456,11 @@
                 <div class="row" style="justify-content: center;">
                     <div class="flex-col" style="display: flex; justify-content: center;">
                         <div class="btn btn-normal">
-                            <a href="https://ciaobang.com" target="_blank" rel="noopener" class="btn-click magnetic"
+                            <a href="https://www.luiss.edu" target="_blank" rel="noopener" class="btn-click magnetic"
                                 data-strength="25" data-strength-text="15">
                                 <div class="btn-fill"></div>
                                 <span class="btn-text">
-                                    <span class="btn-text-inner change">Visit ciaobang.com</span>
+                                    <span class="btn-text-inner change">Visit luiss.edu</span>
                                 </span>
                             </a>
                         </div>
@@ -622,7 +592,6 @@
         </div>
     </main>
     <script defer src="../../assets/js/app.d7e311a7.min.js"></script>
-    <script defer src="../../assets/js/horizontal-strip.js"></script>
 
 
     <!-- Vercel Speed Insights -->

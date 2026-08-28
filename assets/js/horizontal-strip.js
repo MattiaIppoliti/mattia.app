@@ -16,6 +16,7 @@
 (function () {
     var raf = 0;
     var running = false;
+    var live = false;
 
     function frame() {
         raf = 0;
@@ -24,23 +25,38 @@
         var track = viewport && viewport.querySelector('.h-strip-track');
         if (!section || !viewport || !track) { running = false; return; }
 
-        var travel = track.scrollWidth - section.clientWidth;
+        var rect = section.getBoundingClientRect();
+        var vh = window.innerHeight;
 
-        if (travel > 24) {
-            // The frame is shorter than the viewport, so it parks at the middle
-            // rather than the top. `passed` is how far past that resting line
-            // the section has pushed; clamped to [0, travel] it is both the
-            // distance the frame must be nudged down to stay put and the
-            // distance the image must slide left, which keeps the two in
-            // lockstep.
-            var rest = (window.innerHeight - viewport.offsetHeight) / 2;
-            var passed = rest - section.getBoundingClientRect().top;
-            var offset = passed < 0 ? 0 : (passed > travel ? travel : passed);
-            viewport.style.transform = 'translate3d(0,' + offset.toFixed(1) + 'px,0)';
-            track.style.transform = 'translate3d(' + (-offset).toFixed(1) + 'px,0,0)';
-        } else {
-            viewport.style.transform = '';
-            track.style.transform = '';
+        // Promoting the track costs a layer as wide as the picture, near 12 MB
+        // here, so .is-live carries that promotion and only while the strip is
+        // within a viewport of being in play. This rides on the rect we already
+        // had to read, so watching for it is free.
+        var near = rect.bottom > -vh && rect.top < vh * 2;
+        if (near !== live) {
+            live = near;
+            section.classList.toggle('is-live', near);
+        }
+
+        if (near) {
+            var travel = track.scrollWidth - section.clientWidth;
+
+            if (travel > 24) {
+                // The frame is shorter than the viewport, so it parks at the
+                // middle rather than the top. `passed` is how far past that
+                // resting line the section has pushed; clamped to [0, travel]
+                // it is both the distance the frame must be nudged down to stay
+                // put and the distance the image must slide left, which keeps
+                // the two in lockstep.
+                var rest = (vh - viewport.offsetHeight) / 2;
+                var passed = rest - rect.top;
+                var offset = passed < 0 ? 0 : (passed > travel ? travel : passed);
+                viewport.style.transform = 'translate3d(0,' + offset.toFixed(1) + 'px,0)';
+                track.style.transform = 'translate3d(' + (-offset).toFixed(1) + 'px,0,0)';
+            } else {
+                viewport.style.transform = '';
+                track.style.transform = '';
+            }
         }
 
         raf = requestAnimationFrame(frame);
@@ -78,7 +94,11 @@
         if (raf) cancelAnimationFrame(raf);
         raf = 0;
         running = false;
+        // Barba swaps in a fresh section that carries no class, so a stale
+        // `live` would make the next frame think it had already applied it.
+        live = false;
     }
+
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', start);
