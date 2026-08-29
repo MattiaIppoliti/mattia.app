@@ -1584,11 +1584,17 @@ function initDynamicNotch() {
         const desktopOpenWidth = 466.82;
         const desktopClosedHeight = 60;
         const desktopOpenHeight = 124;
-        const mobileClosedWidth = 215;
-        const mobileClosedHeight = 33;
-        const mobileOpenWidth = 382;
-        const mobileOpenHeight = 120;
-        const mobileMaxWidth = Math.max(240, window.innerWidth - 16);
+        const mobileMenuButton = document.querySelector('.btn-hamburger .btn-click');
+        const mobileMenuButtonHeight = mobileMenuButton
+            ? parseFloat(window.getComputedStyle(mobileMenuButton).height)
+            : 64;
+        const mobileClosedHeight = Number.isFinite(mobileMenuButtonHeight) && mobileMenuButtonHeight > 0
+            ? mobileMenuButtonHeight
+            : 64;
+        const mobileClosedWidth = mobileClosedHeight * (127 / 36);
+        const mobileOpenWidth = 366;
+        const mobileOpenHeight = 208;
+        const mobileMaxWidth = Math.max(1, window.innerWidth - 16);
 
         const resolvedMobileClosedWidth = Math.min(mobileClosedWidth, mobileMaxWidth);
         const resolvedMobileOpenWidth = Math.min(mobileOpenWidth, mobileMaxWidth);
@@ -1753,7 +1759,7 @@ function initDynamicNotch() {
     };
 
     const animateNotchState = (shouldExpand) => {
-        const targetExpandedState = isMobileNotchView() ? false : shouldExpand;
+        const targetExpandedState = shouldExpand;
 
         if (targetExpandedState === false) {
             notch.classList.remove('is-touch-expanded');
@@ -1774,36 +1780,42 @@ function initDynamicNotch() {
         const sizes = getNotchSizes();
         syncNotchRowSizing(sizes);
 
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const isMobileTransition = isMobileNotchView();
+        const resizeDuration = prefersReducedMotion ? 0.16 : (isMobileTransition ? 0.42 : 0.8);
+        const contentDuration = prefersReducedMotion ? 0.12 : (isMobileTransition ? 0.26 : 0.45);
+        const resizeEase = isMobileTransition ? 'power3.out' : 'elastic.out(1, 0.72)';
+
         if (targetExpandedState) {
             dynamicNotchTimeline = gsap.timeline();
             dynamicNotchTimeline
                 .to(shell, {
                     width: sizes.openWidth,
                     height: sizes.openHeight,
-                    duration: 0.8,
-                    ease: 'elastic.out(1, 0.72)'
+                    duration: resizeDuration,
+                    ease: resizeEase
                 }, 0)
                 .to(expanded, {
                     autoAlpha: 1,
                     y: 0,
-                    duration: 0.45,
+                    duration: contentDuration,
                     ease: 'power3.out'
-                }, 0.22);
+                }, prefersReducedMotion ? 0 : (isMobileTransition ? 0.12 : 0.22));
         } else {
             dynamicNotchTimeline = gsap.timeline();
             dynamicNotchTimeline
                 .to(expanded, {
                     autoAlpha: 0,
                     y: 12,
-                    duration: 0.22,
+                    duration: prefersReducedMotion ? 0.1 : 0.22,
                     ease: 'power2.in'
                 }, 0)
                 .to(shell, {
                     width: sizes.closedWidth,
                     height: sizes.closedHeight,
-                    duration: 0.8,
-                    ease: 'elastic.out(1, 0.72)'
-                }, 0.04);
+                    duration: resizeDuration,
+                    ease: resizeEase
+                }, prefersReducedMotion ? 0 : 0.04);
         }
     };
 
@@ -1811,24 +1823,8 @@ function initDynamicNotch() {
         syncFloatingMode();
         const sizes = getNotchSizes();
 
-        if (isMobileNotchView()) {
-            if (dynamicNotchTimeline) {
-                dynamicNotchTimeline.kill();
-                dynamicNotchTimeline = null;
-            }
-            isExpanded = false;
-            notch.classList.remove('is-expanded', 'is-touch-expanded');
-            setLinksFocusable(false);
-            gsap.set(expanded, {
-                autoAlpha: 0,
-                y: 12
-            });
-            shell.tabIndex = -1;
-            shell.setAttribute('aria-disabled', 'true');
-        } else {
-            shell.tabIndex = 0;
-            shell.removeAttribute('aria-disabled');
-        }
+        shell.tabIndex = 0;
+        shell.removeAttribute('aria-disabled');
 
         syncNotchRowSizing(sizes);
         gsap.set(shell, {
@@ -1879,10 +1875,14 @@ function initDynamicNotch() {
 
     const handleTouchToggle = (event) => {
         if (isMobileNotchView()) {
-            if (!event.target.closest('a')) {
-                event.preventDefault();
-                event.stopPropagation();
+            if (event.target.closest('.dynamic-notch-expanded a')) {
+                return;
             }
+            event.preventDefault();
+            event.stopPropagation();
+            const shouldExpand = !notch.classList.contains('is-expanded');
+            notch.classList.toggle('is-touch-expanded', shouldExpand);
+            animateNotchState(shouldExpand);
             return;
         }
 
@@ -1915,16 +1915,6 @@ function initDynamicNotch() {
     };
 
     const handleKeyboardToggle = (event) => {
-        if (isMobileNotchView()) {
-            if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-            }
-            if (event.key === 'Escape') {
-                animateNotchState(false);
-            }
-            return;
-        }
-
         if ((event.key === 'Enter' || event.key === ' ') && event.target !== shell) {
             return;
         }
@@ -1964,10 +1954,6 @@ function initDynamicNotch() {
         shell.blur();
     };
 
-    const handleLinkPointerDown = () => {
-        collapseFromLinkInteraction();
-    };
-
     const handleLinkClick = () => {
         collapseFromLinkInteraction();
     };
@@ -1987,7 +1973,6 @@ function initDynamicNotch() {
     shell.addEventListener('click', handleTouchToggle);
     shell.addEventListener('keydown', handleKeyboardToggle);
     linkNodes.forEach((link) => {
-        link.addEventListener('pointerdown', handleLinkPointerDown);
         link.addEventListener('click', handleLinkClick);
     });
     document.addEventListener('pointerdown', handleOutsidePointer);
@@ -1998,7 +1983,6 @@ function initDynamicNotch() {
         window.removeEventListener('resize', resizeNotch);
         document.removeEventListener('pointerdown', handleOutsidePointer);
         linkNodes.forEach((link) => {
-            link.removeEventListener('pointerdown', handleLinkPointerDown);
             link.removeEventListener('click', handleLinkClick);
         });
         shell.removeEventListener('keydown', handleKeyboardToggle);
