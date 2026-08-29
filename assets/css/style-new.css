@@ -972,22 +972,22 @@ html.touch-device main .main-wrap {
     }
     .dynamic-notch-compact {
         height: 100%;
-        padding: 8px 14px;
-        gap: 10px;
+        padding: 6px 10px;
+        gap: 8px;
         justify-content: flex-start;
         position: relative;
     }
     .dynamic-notch-avatar {
         display: block;
-        width: 44px;
-        height: 44px;
+        width: 36px;
+        height: 36px;
         margin-left: 0;
     }
     .dynamic-notch-text {
         display: none;
     }
     .dynamic-notch-time {
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 600;
         margin-left: 0;
         text-align: center;
@@ -1009,13 +1009,13 @@ html.touch-device main .main-wrap {
         display: none;
     }
     .dynamic-notch-mobile-available .dynamic-notch-sonar {
-        width: 7px;
-        height: 7px;
-        box-shadow: 0 0 8px rgba(0, 255, 111, .65), 0 0 12px rgba(0, 255, 111, .32);
+        width: 6px;
+        height: 6px;
+        box-shadow: 0 0 7px rgba(0, 255, 111, .65), 0 0 11px rgba(0, 255, 111, .32);
     }
     .dynamic-notch-mobile-available .dynamic-notch-sonar::after {
-        width: 42px;
-        height: 42px;
+        width: 36px;
+        height: 36px;
     }
     .dynamic-notch.is-expanded .dynamic-notch-compact {
         display: flex;
@@ -4584,8 +4584,6 @@ html.touch-device main .case-intro-image .btn-wrap {
 .block-button .row .flex-col:last-child {
     margin-right: 0;
 }
-
-
 
 
 

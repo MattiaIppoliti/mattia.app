@@ -1588,9 +1588,10 @@ function initDynamicNotch() {
         const mobileMenuButtonHeight = mobileMenuButton
             ? parseFloat(window.getComputedStyle(mobileMenuButton).height)
             : 64;
-        const mobileClosedHeight = Number.isFinite(mobileMenuButtonHeight) && mobileMenuButtonHeight > 0
+        const resolvedMobileMenuButtonHeight = Number.isFinite(mobileMenuButtonHeight) && mobileMenuButtonHeight > 0
             ? mobileMenuButtonHeight
             : 64;
+        const mobileClosedHeight = resolvedMobileMenuButtonHeight * 0.75;
         const mobileClosedWidth = mobileClosedHeight * (127 / 36);
         const mobileOpenWidth = 366;
         const mobileOpenHeight = 208;
@@ -1600,6 +1601,7 @@ function initDynamicNotch() {
         const resolvedMobileOpenWidth = Math.min(mobileOpenWidth, mobileMaxWidth);
         const mobileClosedScale = resolvedMobileClosedWidth / mobileClosedWidth;
         const mobileOpenScale = resolvedMobileOpenWidth / mobileOpenWidth;
+        const resolvedMobileClosedHeight = Math.round(mobileClosedHeight * mobileClosedScale);
 
         return {
             closedWidth: isSmallScreen
@@ -1608,8 +1610,12 @@ function initDynamicNotch() {
             openWidth: isSmallScreen
                 ? resolvedMobileOpenWidth
                 : Math.min(desktopOpenWidth, window.innerWidth - 24),
-            closedHeight: isSmallScreen ? Math.round(mobileClosedHeight * mobileClosedScale) : desktopClosedHeight,
-            openHeight: isSmallScreen ? Math.round(mobileOpenHeight * mobileOpenScale) : desktopOpenHeight
+            closedHeight: isSmallScreen ? resolvedMobileClosedHeight : desktopClosedHeight,
+            openHeight: isSmallScreen ? Math.round(mobileOpenHeight * mobileOpenScale) : desktopOpenHeight,
+            closedOffsetY: isSmallScreen
+                ? Math.max(0, (resolvedMobileMenuButtonHeight - resolvedMobileClosedHeight) / 2)
+                : 0,
+            openOffsetY: 0
         };
     };
 
@@ -1710,6 +1716,9 @@ function initDynamicNotch() {
     shell.style.width = `${initialSizes.closedWidth}px`;
     shell.style.height = `${initialSizes.closedHeight}px`;
     body.appendChild(notch);
+    gsap.set(shell, {
+        y: initialSizes.closedOffsetY
+    });
 
     // When the browser paints its own UI above the page (iOS Safari top
     // address bar), safe-area-inset-top spans that bar and the notch can't
@@ -1792,6 +1801,7 @@ function initDynamicNotch() {
                 .to(shell, {
                     width: sizes.openWidth,
                     height: sizes.openHeight,
+                    y: sizes.openOffsetY,
                     duration: resizeDuration,
                     ease: resizeEase
                 }, 0)
@@ -1813,6 +1823,7 @@ function initDynamicNotch() {
                 .to(shell, {
                     width: sizes.closedWidth,
                     height: sizes.closedHeight,
+                    y: sizes.closedOffsetY,
                     duration: resizeDuration,
                     ease: resizeEase
                 }, prefersReducedMotion ? 0 : 0.04);
@@ -1829,7 +1840,8 @@ function initDynamicNotch() {
         syncNotchRowSizing(sizes);
         gsap.set(shell, {
             width: isExpanded ? sizes.openWidth : sizes.closedWidth,
-            height: isExpanded ? sizes.openHeight : sizes.closedHeight
+            height: isExpanded ? sizes.openHeight : sizes.closedHeight,
+            y: isExpanded ? sizes.openOffsetY : sizes.closedOffsetY
         });
     };
 
