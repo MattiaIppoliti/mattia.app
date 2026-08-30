@@ -193,6 +193,90 @@
                 .project-note-icon, .project-note-icon svg, .project-note-icon img { width: 26px; max-width: 26px; }
             }
 
+            /* The custom YouTube player is dependency-free so it also works
+               when this static page is entered through Barba navigation. The
+               iframe is created only after the visitor presses play. */
+            .cs-video-shell { flex: 1 1 auto; width: 100%; margin: 0; }
+            .cs-video-player {
+                position: relative; width: 100%; aspect-ratio: 16 / 9;
+                overflow: hidden; isolation: isolate; border-radius: 14px;
+                border: 1px solid rgba(28, 29, 32, .22); background: #111;
+                box-shadow: 0 18px 40px rgba(0, 0, 0, .14);
+            }
+            .cs-video-player iframe {
+                position: absolute; inset: 0; width: 100%; height: 100%;
+                border: 0; background: #000;
+            }
+            .cs-video-start {
+                position: absolute; inset: 0; z-index: 1; display: block;
+                width: 100%; height: 100%; padding: 0; border: 0;
+                overflow: hidden; cursor: pointer; color: #fff; background: #111;
+                font: inherit; text-align: left;
+            }
+            .cs-video-start::after {
+                content: ""; position: absolute; inset: 0; z-index: 1;
+                background: linear-gradient(180deg, rgba(0, 0, 0, .05) 42%, rgba(0, 0, 0, .72) 100%);
+            }
+            .cs-video-thumbnail {
+                position: absolute; inset: 0; width: 100%; height: 100%;
+                display: block; object-fit: cover; opacity: .92;
+                transform: scale(1.002); filter: saturate(1.08);
+                transition: transform 500ms cubic-bezier(.2, .7, .3, 1), opacity 300ms ease;
+            }
+            .cs-video-start:hover .cs-video-thumbnail { transform: scale(1.025); opacity: 1; }
+            .cs-video-play {
+                position: absolute; left: 50%; top: 50%; z-index: 2;
+                display: grid; place-items: center; width: clamp(4.5rem, 8vw, 7rem);
+                height: clamp(4.5rem, 8vw, 7rem); border-radius: 50%;
+                transform: translate(-50%, -50%); color: #fff;
+                border: 1px solid rgba(255, 255, 255, .38);
+                background: rgba(28, 29, 32, .48);
+                backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+                transition: transform 220ms cubic-bezier(.2, .7, .3, 1), background-color 220ms ease;
+            }
+            .cs-video-start:hover .cs-video-play {
+                transform: translate(-50%, -50%) scale(1.06);
+                background: rgba(28, 29, 32, .68);
+            }
+            .cs-video-play svg { width: 31%; height: auto; margin-left: 5%; fill: currentColor; }
+            .cs-video-title {
+                position: absolute; left: clamp(1rem, 3vw, 2.25rem);
+                right: clamp(1rem, 3vw, 2.25rem); bottom: clamp(1rem, 3vw, 2rem);
+                z-index: 2; font-size: clamp(1rem, 2.1vw, 1.6rem);
+                font-weight: 600; line-height: 1.2; letter-spacing: -.012em;
+                text-shadow: 0 1px 12px rgba(0, 0, 0, .4);
+            }
+            .cs-video-expand {
+                position: absolute; top: clamp(.75rem, 2vw, 1.25rem);
+                right: clamp(.75rem, 2vw, 1.25rem); z-index: 3;
+                display: grid; place-items: center; width: 3rem; height: 3rem;
+                padding: 0; border-radius: 50%; cursor: pointer; color: #fff;
+                border: 1px solid rgba(255, 255, 255, .38);
+                background: rgba(28, 29, 32, .48);
+                backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+                transition: transform 180ms ease, background-color 180ms ease;
+            }
+            .cs-video-expand:hover { transform: scale(1.06); background: rgba(28, 29, 32, .68); }
+            .cs-video-expand svg { width: 1.1rem; height: 1.1rem; }
+            .cs-video-start:focus-visible, .cs-video-expand:focus-visible {
+                outline: 3px solid #fff; outline-offset: -5px;
+            }
+            .cs-video-player:fullscreen { border: 0; border-radius: 0; }
+            @media (prefers-reduced-motion: reduce) {
+                .cs-video-thumbnail, .cs-video-play, .cs-video-expand { transition: none; }
+                .cs-video-start:hover .cs-video-thumbnail { transform: none; }
+            }
+            @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+                .cs-video-play, .cs-video-expand {
+                    background: #1c1d20; backdrop-filter: none; -webkit-backdrop-filter: none;
+                }
+            }
+            @media (max-width: 560px) {
+                .cs-video-player { border-radius: 10px; }
+                .cs-video-expand { width: 2.5rem; height: 2.5rem; }
+                .cs-video-title { max-width: calc(100% - 4.5rem); }
+            }
+
             /* Ciele hero clouds: slide in on load, then drift forever.
                Ported from the hero-clouds component on ciele.app. */
             .ciele-sun { position: absolute; right: 8%; top: -14%; width: 320px; height: 320px;
@@ -426,6 +510,35 @@
                         <ul>
                             <li>2026.</li>
                         </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section project-body" data-scroll-section style="padding-top: 2.4em; padding-bottom: 0;">
+            <div class="container medium once-in">
+                <div class="row project-figure">
+                    <div class="flex-col">
+                        <figure class="cs-video-shell">
+                            <div class="cs-video-player" data-youtube-player>
+                                <button class="cs-video-start" type="button"
+                                    aria-label="Play Introducing Ciele, your organization’s AI Teammates Platform"
+                                    onclick='var player=this.closest("[data-youtube-player]"); player.classList.add("is-playing"); player.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/SoUEkM2Sjmw?autoplay=1&amp;rel=0" title="Introducing Ciele, your organization’s AI Teammates Platform" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;'>
+                                    <img class="cs-video-thumbnail"
+                                        src="https://i.ytimg.com/vi/SoUEkM2Sjmw/maxresdefault.jpg"
+                                        alt="" width="1280" height="720" loading="lazy">
+                                    <span class="cs-video-play" aria-hidden="true">
+                                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    </span>
+                                    <span class="cs-video-title">Introducing Ciele, your organization’s AI Teammates Platform</span>
+                                </button>
+                                <button class="cs-video-expand" type="button" aria-label="View video full screen"
+                                    onclick='var player=this.closest("[data-youtube-player]"); if (player.requestFullscreen) { player.requestFullscreen(); } else if (player.webkitRequestFullscreen) { player.webkitRequestFullscreen(); }'>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </figure>
                     </div>
                 </div>
             </div>
