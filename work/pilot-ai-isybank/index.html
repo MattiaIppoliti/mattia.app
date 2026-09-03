@@ -528,7 +528,7 @@
                     <div class="flex-col project-note">
                         <span class="project-note-icon project-note-icon-lg" style="opacity: 1;"><img
                                 src="../../assets/img/projects/decor/isybank-mark.png" alt="" loading="lazy"></span>
-                        <p>isybank is the digital bank of Intesa Sanpaolo. Everything its customers do runs through menus, and the tax forms are the worst of it. An F24 wants a tax code, a section, a municipality code and an instalment code before it accepts a single euro. Almost nobody knows those by heart, and one wrong digit sends the money to the wrong treasury.</p>
+                        <p>isybank is the digital bank of Intesa Sanpaolo, and everything its customers do there runs through menus. Comparing what you spent on two things means filtering a transaction list by hand. Finding one receipt means walking an archive. Picking a card means reading four plans side by side. Paying a tax form means knowing codes almost nobody knows by heart, and one wrong digit sends the money to the wrong treasury.</p>
                     </div>
                 </div>
                 <div class="row project-figure">
@@ -550,7 +550,7 @@
                 </div>
                 <div class="row">
                     <div class="flex-col">
-                        <p>My team and I built a conversational layer over the existing banking services. Six of us: two on the front end, three on the back end, and me. It reads the intent, pulls the fields out of the sentence, and closes the gaps on its own. It finds an IBAN in the address book, turns the word IMU into tax codes 3912 through 3915, resolves Biella into municipality code A859, categorises transactions so a spending question has something to compare. When the sentence carries less than a form needs, it asks for one field at a time instead of throwing a blank form back at you. Then it stops, shows what it is about to do, and waits. Nothing executes without a confirmation.</p>
+                        <p>My team and I built a conversational layer over the existing banking services. Six of us: two on the front end, three on the back end, and me. It reads the intent, pulls the fields out of the sentence, and closes the gaps on its own. Transactions get categorised, so a spending question has something to compare and a chart to draw. The document archive gets indexed, so "the November transfer receipt" resolves to one file. Card plans get scored against a profile. Names resolve to identifiers, an IBAN out of the address book, the word IMU into tax codes 3912 through 3915, Biella into municipality code A859. When a request carries less than an operation needs, the assistant asks for one field at a time rather than handing back a blank form.</p>
                     </div>
                 </div>
                 <div class="row project-figure">
@@ -562,12 +562,12 @@
                 </div>
                 <div class="row">
                     <div class="flex-col">
-                        <p>One demo run walks through four of these end to end: a scheduled transfer, a search through unread documents, a filter over outgoing transactions, and an F24 payment. Fifty euro to a named payee with the reason "dinner", dated to the next day, sent after a single confirmation. The F24 came back precompiled across twelve fields, and the bank's own system posted the two hundred euro payment and pushed the usual notification. The customer typed no field values at any point.</p>
+                        <p>The pilot covered the whole set. Spending comparisons came back as charts, category questions as short lists, investment questions as performance, document requests as the file itself, and card recommendations as a plan the customer could buy on the spot. The recording walks four of them end to end. A transfer of fifty euro to a named payee, reason "dinner", dated to the next day, sent after one confirmation. A search that returns the unread November transfer document. October outgoing transactions, filtered. And a tax form, precompiled across twelve fields, with the bank's own system posting the two hundred euro payment and pushing the usual notification. The customer typed no field values at any point.</p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="flex-col">
-                        <p>The language model is the least interesting part of this. What makes it usable is the pause before execution: seven questions on the F24, each answered with a yes, then the full summary of twelve fields on screen. A wrong tax code is not a wrong answer, it is money in the wrong place, so the assistant would rather ask again than guess.</p>
+                        <p>The language model is the least interesting part of this. What makes it usable is the pause before every action that moves money or signs a customer up to something: the summary on screen, then the wait. Answering a question wrongly costs a follow-up. Executing wrongly sends money to the wrong treasury or puts someone on a card plan they did not ask for, so the assistant would rather ask again than guess. On the tax form that meant seven questions before it wrote anything, which nobody enjoys and everybody prefers to the alternative.</p>
                     </div>
                 </div>
             </div>
