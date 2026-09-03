@@ -11,6 +11,7 @@
 - [Surveys AI Platform](https://mattia.app/work/ciao-surveys/): personality and beliefs survey platform with 181 prompts and trait dashboards across NEO, HEXACO and MPQ
 - [Ciele](https://mattia.app/work/ciele/): self-hostable platform for AI Teammates that answer from an organization's own knowledge
 - [Luiss.edu](https://mattia.app/work/luiss/): rebuilt university website with an owned hybrid search engine and an agentic RAG assistant that answers with citations
+- [Pilot AI Intelligence isybank](https://mattia.app/work/pilot-ai-isybank/): assistant piloted inside the isybank app that answers questions on spending, investments and documents, then carries out transfers, F24 tax payments and card plan purchases in chat
 - [Accomplishments](https://mattia.app/accomplishments/): certifications and milestones
 - [Contact](https://mattia.app/contact/): how to get in touch
 
