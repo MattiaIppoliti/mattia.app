@@ -1,0 +1,715 @@
+<!DOCTYPE html><!--  This site was created by Mattia Ippoliti  -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <script>
+        (function() {
+            document.documentElement.classList.add('js');
+            var coarsePointerMatch = window.matchMedia ? window.matchMedia('(hover: none), (pointer: coarse)').matches : false;
+            var isTouchDevice = coarsePointerMatch || ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+            document.documentElement.classList.add(isTouchDevice ? 'touch-device' : 'no-touch-device');
+            document.documentElement.classList.remove(isTouchDevice ? 'no-touch-device' : 'touch-device');
+            if (!window.__mattiaSetVh) {
+                window.__mattiaSetVh = function() {
+                    document.documentElement.style.setProperty('--vh', (window.innerHeight * 0.01) + 'px');
+                };
+            }
+            window.__mattiaSetVh();
+        })();
+    </script>
+
+    <title>POC AI isybank | Mattia Ippoliti</title>
+    <meta name="description"
+        content="A proof of concept at Intesa Sanpaolo: a generative assistant inside isybank that runs transfers, document searches and F24 tax payments from a spoken sentence.">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:url" content="https://mattia.app/work/poc-ai-isybank/">
+    <meta property="og:title" content="POC AI isybank | Mattia Ippoliti">
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+    <meta property="og:description"
+        content="A generative assistant inside isybank that runs transfers and F24 tax payments from a spoken sentence.">
+    <meta property="og:site_name" content="Mattia Ippoliti" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://mattia.app/assets/img/og-profile.jpg">
+    <meta property="og:image:alt" content="Mattia Ippoliti, software engineer in Rome, Italy">
+    <meta property="og:image:width" content="835">
+    <meta property="og:image:height" content="976">
+    <meta property="og:locale" content="en_US">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="POC AI isybank | Mattia Ippoliti">
+    <meta name="twitter:description"
+        content="A generative assistant inside isybank that runs transfers and F24 tax payments from a spoken sentence.">
+    <meta name="twitter:image" content="https://mattia.app/assets/img/og-profile.jpg">
+    <meta name="twitter:image:alt" content="Mattia Ippoliti, software engineer in Rome, Italy">
+
+    <meta name="theme-color" content="#1C1D20">
+
+    <link rel="canonical" href="https://mattia.app/work/poc-ai-isybank/">
+    <link rel="preload" href="../../assets/fonts/UncutSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../assets/fonts/UncutSans-Bold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../assets/fonts/Gulax-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <link href="../../assets/css/site.cc9075e1.min.css" rel="stylesheet">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://mattia.app/#website",
+          "url": "https://mattia.app/",
+          "name": "Mattia Ippoliti",
+          "alternateName": ["mattia app", "mattiaippoliti", "mattiaippoliti.com"],
+          "inLanguage": "en"
+        },
+        {
+          "@type": "Person",
+          "@id": "https://mattia.app/#person",
+          "name": "Mattia Ippoliti",
+          "url": "https://mattia.app/",
+          "image": "https://mattia.app/assets/img/og-profile-circular.png",
+          "jobTitle": "Software Engineer",
+          "sameAs": [
+            "https://www.linkedin.com/in/mattiaippoliti/",
+            "https://github.com/MattiaIppoliti",
+            "https://www.researchgate.net/profile/Mattia-Ippoliti"
+          ]
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://mattia.app/work/poc-ai-isybank/#webpage",
+          "url": "https://mattia.app/work/poc-ai-isybank/",
+          "name": "POC AI isybank | Mattia Ippoliti",
+          "description": "A generative assistant inside isybank that runs transfers and F24 tax payments from a spoken sentence.",
+          "isPartOf": { "@id": "https://mattia.app/#website" },
+          "author": { "@id": "https://mattia.app/#person" },
+          "inLanguage": "en"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://mattia.app/work/poc-ai-isybank/#breadcrumb",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mattia.app/" },
+            { "@type": "ListItem", "position": 2, "name": "Work", "item": "https://mattia.app/work/" },
+            { "@type": "ListItem", "position": 3, "name": "POC AI isybank", "item": "https://mattia.app/work/poc-ai-isybank/" }
+          ]
+        }
+      ]
+    }
+    </script></head>
+
+<body data-barba="wrapper">
+    <div class="no-scroll-overlay"></div>
+    <div class="second-circle"></div>
+    <div class="loading-container">
+        <div class="loading-screen">
+            <div class="rounded-div-wrap top">
+                <div class="rounded-div"></div>
+            </div>
+            <div class="loading-words">
+                <h2 class="home-active home-active-first">Hello<div class="dot"></div>
+                </h2>
+                <h2 class="home-active">Bonjour<div class="dot"></div>
+                </h2>
+                <h2 class="home-active">स्वागत हे<div class="dot"></div>
+                </h2>
+                <h2 class="home-active">Hallo<div class="dot"></div>
+                </h2>
+                <h2 class="home-active">Olá<div class="dot"></div>
+                </h2>
+                <h2 class="home-active jap">おい<div class="dot"></div>
+                </h2>
+                <h2 class="home-active">Hallå<div class="dot"></div>
+                </h2>
+                <h2 class="home-active">Guten tag<div class="dot"></div>
+                </h2>
+                <h2 class="home-active-last">Ciao<div class="dot"></div>
+                </h2>
+                <h2>Home<div class="dot"></div>
+                </h2>
+                <h2>Work<div class="dot"></div>
+                </h2>
+                <h2>Ciao!<div class="dot"></div>
+                </h2>
+                <h2>Surveys AI Platform<div class="dot"></div>
+                </h2>
+                <h2>Ciele<div class="dot"></div>
+                </h2>
+                <h2 class="active">POC AI isybank<div class="dot"></div>
+                </h2>
+                <h2>About<div class="dot"></div>
+                </h2>
+                <h2>Contact<div class="dot"></div>
+                </h2>
+            </div>
+            <div class="rounded-div-wrap bottom">
+                <div class="rounded-div"></div>
+            </div>
+        </div>
+    </div>
+    <main class="main" id="project-isybank" data-barba="container" data-barba-namespace="project-isybank">
+        <style>
+            .project-hero { position: relative; overflow: hidden; }
+            .project-decor { position: absolute; inset: 0; pointer-events: none; }
+            .project-body .row { padding-top: 1.6em; }
+            .project-body .row:first-child { padding-top: 0; }
+            /* Copy runs to the same width as the figures rather than
+               stopping at a 44em measure. */
+            .project-body p { max-width: none; }
+            .project-figure { padding-top: 1.1em !important; }
+            .project-figure img { width: 100%; height: auto; display: block; border-radius: 14px; }
+            .project-meta-row { display: flex; flex-wrap: wrap; row-gap: 4.4em; }
+            .project-meta-row .flex-col { width: 33.333%; min-width: 220px; padding-right: 2em; margin-bottom: 2em; }
+            .project-meta-row .section-label { margin: 0; font-size: .8em; }
+            .project-meta-row .stripe { margin-top: 1.1em; margin-bottom: 1.5em; }
+            .project-meta-row h4 { margin: 0; }
+            .project-meta-row ul { padding-top: .8em; padding-bottom: .4em; }
+            .project-note { display: flex !important; flex-direction: row !important; align-items: flex-start; gap: 1.1em; }
+            .project-note-icon { flex: 0 0 auto; width: 34px; max-width: 34px; color: var(--color-dark); opacity: .55; }
+            .project-note-icon svg, .project-note-icon img { width: 34px; max-width: 34px; height: auto; display: block; }
+            .project-note-icon-lg, .project-note-icon-lg img { width: 46px; max-width: 46px; }
+            .project-note p { flex: 1 1 auto; }
+
+            /* Tracking is size-specific, so one value cannot be right at every
+               size. The 78px h1 and 48px h2 were set at 0 and read loose; the
+               9.6px label already carries +0.05em, which is correct for it. */
+            .project-hero h1 { letter-spacing: -0.022em; }
+            .project-body h2, .project-hero h2 { letter-spacing: -0.018em; }
+            .project-meta-row h4 { letter-spacing: -0.008em; line-height: 1.25; }
+
+            /* Press feedback belongs on pointer-down, not on release. The
+               magnetic script owns the inline transform on .btn-click, so the
+               press scale goes on the wrapper, which nothing else touches. */
+            .btn-normal { transition: transform 140ms cubic-bezier(.2, .7, .3, 1); }
+            .btn-normal:active { transform: scale(.97); }
+            @media (prefers-reduced-motion: reduce) {
+                /* Keep the feedback, drop the travel: it lands instantly. */
+                .btn-normal { transition: none; }
+            }
+            @media (max-width: 767px) {
+                .project-meta-row .flex-col { width: 100%; padding-right: 0; margin-bottom: 2.6em; }
+                .project-note-icon, .project-note-icon svg, .project-note-icon img { width: 26px; max-width: 26px; }
+            }
+
+            /* The custom YouTube player is dependency-free so it also works
+               when this static page is entered through Barba navigation. The
+               iframe is created only after the visitor presses play. */
+            .cs-video-shell { flex: 1 1 auto; width: 100%; margin: 0; }
+            .cs-video-player {
+                position: relative; width: 100%; aspect-ratio: 16 / 9;
+                overflow: hidden; isolation: isolate; border-radius: 14px;
+                border: 1px solid rgba(28, 29, 32, .22); background: #111;
+                box-shadow: 0 18px 40px rgba(0, 0, 0, .14);
+            }
+            .cs-video-player iframe {
+                position: absolute; inset: 0; width: 100%; height: 100%;
+                border: 0; background: #000;
+            }
+            .cs-video-start {
+                position: absolute; inset: 0; z-index: 1; display: block;
+                width: 100%; height: 100%; padding: 0; border: 0;
+                overflow: hidden; cursor: pointer; color: #fff; background: #111;
+                font: inherit; text-align: left;
+            }
+            .cs-video-start::after {
+                content: ""; position: absolute; inset: 0; z-index: 1;
+                background: linear-gradient(180deg, rgba(0, 0, 0, .05) 42%, rgba(0, 0, 0, .72) 100%);
+            }
+            .cs-video-thumbnail {
+                position: absolute; inset: 0; width: 100%; height: 100%;
+                display: block; object-fit: cover; opacity: .92;
+                transform: scale(1.002); filter: saturate(1.08);
+                transition: transform 500ms cubic-bezier(.2, .7, .3, 1), opacity 300ms ease;
+            }
+            .cs-video-start:hover .cs-video-thumbnail { transform: scale(1.025); opacity: 1; }
+            .cs-video-play {
+                position: absolute; left: 50%; top: 50%; z-index: 2;
+                display: grid; place-items: center; width: clamp(4.5rem, 8vw, 7rem);
+                height: clamp(4.5rem, 8vw, 7rem); border-radius: 50%;
+                transform: translate(-50%, -50%); color: #fff;
+                border: 1px solid rgba(255, 255, 255, .38);
+                background: rgba(28, 29, 32, .48);
+                backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+                transition: transform 220ms cubic-bezier(.2, .7, .3, 1), background-color 220ms ease;
+            }
+            .cs-video-start:hover .cs-video-play {
+                transform: translate(-50%, -50%) scale(1.06);
+                background: rgba(28, 29, 32, .68);
+            }
+            .cs-video-play svg { width: 31%; height: auto; margin-left: 5%; fill: currentColor; }
+            .cs-video-title {
+                position: absolute; left: clamp(1rem, 3vw, 2.25rem);
+                right: clamp(1rem, 3vw, 2.25rem); bottom: clamp(1rem, 3vw, 2rem);
+                z-index: 2; font-size: clamp(1rem, 2.1vw, 1.6rem);
+                font-weight: 600; line-height: 1.2; letter-spacing: -.012em;
+                text-shadow: 0 1px 12px rgba(0, 0, 0, .4);
+            }
+            .cs-video-expand {
+                position: absolute; top: clamp(.75rem, 2vw, 1.25rem);
+                right: clamp(.75rem, 2vw, 1.25rem); z-index: 3;
+                display: grid; place-items: center; width: 3rem; height: 3rem;
+                padding: 0; border-radius: 50%; cursor: pointer; color: #fff;
+                border: 1px solid rgba(255, 255, 255, .38);
+                background: rgba(28, 29, 32, .48);
+                backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+                transition: transform 180ms ease, background-color 180ms ease;
+            }
+            .cs-video-expand:hover { transform: scale(1.06); background: rgba(28, 29, 32, .68); }
+            .cs-video-expand svg { width: 1.1rem; height: 1.1rem; }
+            .cs-video-start:focus-visible, .cs-video-expand:focus-visible {
+                outline: 3px solid #fff; outline-offset: -5px;
+            }
+            .cs-video-player:fullscreen { border: 0; border-radius: 0; }
+            /* Same component, square source: the screen recording behind this
+               Short is 1080x1080, so the frame follows the footage instead of
+               boxing it inside 16:9. */
+            .cs-video-shell--square { max-width: 560px; margin-inline: auto; }
+            .cs-video-shell--square .cs-video-player { aspect-ratio: 1 / 1; }
+            .cs-video-shell--square .cs-video-play {
+                width: clamp(4rem, 14vw, 5.5rem); height: clamp(4rem, 14vw, 5.5rem);
+            }
+            .cs-video-shell--square .cs-video-title { font-size: clamp(1rem, 3.4vw, 1.25rem); }
+            .cs-video-player:fullscreen { aspect-ratio: auto; height: 100%; }
+            @media (prefers-reduced-motion: reduce) {
+                .cs-video-thumbnail, .cs-video-play, .cs-video-expand { transition: none; }
+                .cs-video-start:hover .cs-video-thumbnail { transform: none; }
+            }
+            @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+                .cs-video-play, .cs-video-expand {
+                    background: #1c1d20; backdrop-filter: none; -webkit-backdrop-filter: none;
+                }
+            }
+            @media (max-width: 560px) {
+                .cs-video-player { border-radius: 10px; }
+                .cs-video-expand { width: 2.5rem; height: 2.5rem; }
+                .cs-video-title { max-width: calc(100% - 4.5rem); }
+            }
+
+        </style>
+        <div class="btn btn-hamburger">
+            <div class="btn-click magnetic" data-strength="50" data-strength-text="25">
+                <div class="btn-fill"></div>
+                <div class="btn-text">
+                    <div class="btn-bars"></div>
+                    <span class="btn-text-inner">Menu</span>
+                </div>
+            </div>
+        </div>
+        <div class="overlay fixed-nav-back"></div>
+        <div class="fixed-nav theme-dark">
+            <div class="fixed-nav-rounded-div">
+                <div class="rounded-div-wrap">
+                    <div class="rounded-div"></div>
+                </div>
+            </div>
+            <div class="fixed-nav-inner">
+                <div class="row nav-row">
+                    <p class="section-label">Navigation</p>
+                    <div class="stripe"></div>
+                    <ul class="links-wrap">
+                        <li class="btn btn-link">
+                            <a href="../../" class="btn-click magnetic" data-strength="24"
+                                data-strength-text="12">
+                                <span class="btn-text btn-text-menu">
+                                    <span class="btn-text-inner">Home</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="btn btn-link active">
+                            <a href="../" class="btn-click magnetic" data-strength="24"
+                                data-strength-text="12">
+                                <span class="btn-text btn-text-menu">
+                                    <span class="btn-text-inner">Work</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="btn btn-link">
+                            <a href="../../about/" class="btn-click magnetic" data-strength="24"
+                                data-strength-text="12">
+                                <span class="btn-text btn-text-menu">
+                                    <span class="btn-text-inner">About</span>
+                                </span>
+                            </a>
+                        </li>
+
+                        <li class="btn btn-link">
+                            <a href="../../contact/" class="btn-click magnetic" data-strength="24"
+                                data-strength-text="12">
+                                <span class="btn-text btn-text-menu">
+                                    <span class="btn-text-inner">Contact</span>
+                                </span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="row social-row">
+                    <div class="stripe"></div>
+                    <div class="socials">
+                        <p class="section-label">Socials</p>
+                        <ul>
+                            <li class="btn btn-link btn-link-external">
+                                <a href="https://www.linkedin.com/in/mattiaippoliti/" target="_blank"
+                                    class="btn-click magnetic" data-strength="20" data-strength-text="10">
+                                    <span class="btn-text">
+                                        <span class="btn-text-inner">LinkedIn</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="btn btn-link btn-link-external">
+                                <a href="https://www.researchgate.net/profile/Mattia-Ippoliti" target="_blank"
+                                    class="btn-click magnetic" data-strength="20" data-strength-text="10">
+                                    <span class="btn-text">
+                                        <span class="btn-text-inner">ResearchGate</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="btn btn-link btn-link-external">
+                                <a href="https://github.com/MattiaIppoliti" target="_blank" class="btn-click magnetic"
+                                    data-strength="20" data-strength-text="10">
+                                    <span class="btn-text">
+                                        <span class="btn-text-inner">Github</span>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-wrap" data-scroll-container>
+            <header class="section default-header project-hero" data-scroll-section>
+                <div class="project-decor" aria-hidden="true">
+                    <img src="../../assets/img/projects/decor/isybank-bubbles.webp" alt="" loading="lazy"
+                        style="position:absolute; right:3%; top:-10%; width:20%; max-width:250px; opacity:.32; -webkit-mask-image:radial-gradient(circle at 50% 50%, #000 34%, transparent 68%); mask-image:radial-gradient(circle at 50% 50%, #000 34%, transparent 68%);">
+                    <img src="../../assets/img/projects/decor/isybank-bubbles.webp" alt="" loading="lazy"
+                        style="position:absolute; left:2%; bottom:-14%; width:14%; max-width:170px; opacity:.24; transform:scaleX(-1); -webkit-mask-image:radial-gradient(circle at 50% 50%, #000 32%, transparent 66%); mask-image:radial-gradient(circle at 50% 50%, #000 32%, transparent 66%);">
+                </div>                <div class="nav-bar">
+                    <div class="credits-top">
+                        <div class="btn btn-link btn-left-top">
+                           <a href="../../" class="btn-click magnetic" data-strength="20"
+                           data-strength-text="10" style="transform: rotate(0.001deg);">
+                           <span class="btn-text">
+                               <div class="cbd"><span class="code-by">Hi👋! I am</span><span class="mattia"><span
+                                           class="mattia-span">Mattia</span> <span
+                                           class="ippoliti">Ippoliti</span></span>
+                           </span>
+                   </div>
+                   </span>
+                       </a>
+                     </div>
+                </div>
+                <ul class="links-wrap">
+                    <li class="btn btn-link active">
+                        <a href="../" class="btn-click magnetic" data-strength="20"
+                            data-strength-text="10">
+                            <span class="btn-text">
+                                <span class="btn-text-inner">Work</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="btn btn-link">
+                        <a href="../../about/" class="btn-click magnetic" data-strength="20"
+                            data-strength-text="10">
+                            <span class="btn-text">
+                                <span class="btn-text-inner">About</span>
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="btn btn-link">
+                        <a href="../../contact/" class="btn-click magnetic" data-strength="20" data-strength-text="10">
+                            <span class="btn-text">
+                                <span class="btn-text-inner">Contact</span>
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="btn btn-link btn-menu">
+                        <div class="btn-click magnetic" data-strength="20" data-strength-text="10">
+                            <div class="btn-text">
+                                <span class="btn-text-inner">Menu</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+        </div>
+        <div class="container medium once-in" style="position: relative; z-index: 1;">
+            <div class="row">
+                <div class="flex-col">
+                    <h1><span>POC AI isybank</span></h1>
+                </div>
+            </div>
+        </div>
+        </header>
+        <section class="section project-body" data-scroll-section style="padding-top: 0; padding-bottom: 0;">
+            <div class="container medium once-in">                <div class="row">
+                    <div class="flex-col">
+                        <p>Say the sentence, confirm the summary, the payment goes out.</p>
+                    </div>
+                </div>
+            </div>
+        </section>        <section class="section project-body" data-scroll-section style="padding-top: 3.2em; padding-bottom: 0;">
+            <div class="container medium">
+                <div class="row" style="padding-bottom: 2.2em;">
+                    <div class="flex-col">
+                        <h2>Project</h2>
+                    </div>
+                </div>
+                <div class="row project-meta-row">
+                    <div class="flex-col">
+                        <p class="section-label">01</p>
+                        <div class="stripe"></div>
+                        <h4>Role</h4>
+                        <ul>
+                            <li>AI Software Engineer.</li>
+                        </ul>
+                    </div>
+                    <div class="flex-col">
+                        <p class="section-label">02</p>
+                        <div class="stripe"></div>
+                        <h4>Services</h4>
+                        <ul>
+                            <li>Software Engineering,</li>
+                            <li>Generative AI.</li>
+                        </ul>
+                    </div>
+                    <div class="flex-col">
+                        <p class="section-label">03</p>
+                        <div class="stripe"></div>
+                        <h4>Year</h4>
+                        <ul>
+                            <li>2023.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section project-body" data-scroll-section style="padding-top: 2.4em; padding-bottom: 0;">
+            <div class="container medium once-in">
+                <div class="row project-figure">
+                    <div class="flex-col">
+                        <figure class="cs-video-shell cs-video-shell--square">
+                            <div class="cs-video-player" data-youtube-player>
+                                <button class="cs-video-start" type="button"
+                                    aria-label="Play POC ISY GenAI"
+                                    onclick='var player=this.closest("[data-youtube-player]"); player.classList.add("is-playing"); player.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/StPWy-RpjTM?autoplay=1&amp;rel=0" title="POC ISY GenAI" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;'>
+                                    <img class="cs-video-thumbnail"
+                                        src="../../assets/img/projects/isybank-video-poster.webp"
+                                        alt="" width="1080" height="1080" loading="lazy">
+                                    <span class="cs-video-play" aria-hidden="true">
+                                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    </span>
+                                    <span class="cs-video-title">POC ISY GenAI</span>
+                                </button>
+                                <button class="cs-video-expand" type="button" aria-label="View video full screen"
+                                    onclick='var player=this.closest("[data-youtube-player]"); if (player.requestFullscreen) { player.requestFullscreen(); } else if (player.webkitRequestFullscreen) { player.webkitRequestFullscreen(); }'>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section project-body" data-scroll-section style="padding-top: 1.6em; padding-bottom: 0;">
+            <div class="container medium">
+                <div class="row">
+                    <div class="flex-col">
+                        <h3 style="margin-bottom: .4em;">Situation</h3>
+                        <p>isybank is the digital bank of Intesa Sanpaolo. Its customers move money, hunt for documents and pay taxes through menus, and the tax forms are the worst of it. An F24 asks for a tax code, a section, a municipality code and an instalment code before it accepts a single euro. Almost nobody knows those by heart, and one wrong digit sends the money to the wrong treasury.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="flex-col">
+                        <h3 style="margin-bottom: .4em;">Task</h3>
+                        <p>Find out whether a generative assistant could carry out real operations from one spoken sentence rather than answer questions about them. The proof of concept had to live inside the app, work by voice or keyboard, and end with money actually moving.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="flex-col">
+                        <h3 style="margin-bottom: .4em;">Action</h3>
+                        <p>I built a conversational layer over the existing banking services. It reads the intent, pulls the fields out of the sentence, and closes the gaps on its own. It finds an IBAN in the address book, turns the word IMU into tax codes 3912 through 3915, resolves Biella into municipality code A859. Then it stops, shows what it is about to do, and waits. Nothing executes without a confirmation, and when a form needs more than the sentence carried, the assistant asks for one field at a time.</p>
+                    </div>
+                </div>
+                <div class="row project-figure">
+                    <div class="flex-col">
+                        <img src="../../assets/img/projects/isybank-01.webp"
+                            alt="The isybank assistant listing October outgoing transactions on an iPhone"
+                            width="1707" height="1281" loading="lazy" decoding="async">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="flex-col">
+                        <h3 style="margin-bottom: .4em;">Result</h3>
+                        <p>One demo run covers four flows: a scheduled transfer, a search through unread documents, a filter over outgoing transactions, and an F24 payment. 50 â‚¬ to a named payee with the reason "cena", dated to the next day, executed after a single confirmation. The F24 came back precompiled with twelve fields, and the bank's own system posted the 200 â‚¬ payment and sent the usual notification. The customer typed no field values at any point.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="flex-col">
+                        <p>The language model is the least interesting part of this. What made it usable is the pause before execution: seven questions on the F24, each answered with a yes, then the full summary of twelve fields on screen. A wrong tax code is not a wrong answer, it is money in the wrong place, so the assistant would rather ask again than guess.</p>
+                    </div>
+                </div>
+                <div class="row project-figure">
+                    <div class="flex-col">
+                        <img src="../../assets/img/projects/isybank-02.webp"
+                            alt="The assistant answering with a list of accounted transactions, keyboard and microphone controls below"
+                            width="800" height="1640" loading="lazy" decoding="async"
+                            style="max-width: 380px; margin: 0 auto;">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section" data-scroll-section style="padding-top: 3.2em;">
+            <div class="container medium">
+                <div class="row" style="justify-content: center;">
+                    <div class="flex-col" style="display: flex; justify-content: center;">
+                        <div class="btn btn-normal">
+                            <a href="../" class="btn-click magnetic" data-strength="25" data-strength-text="15">
+                                <div class="btn-fill"></div>
+                                <span class="btn-text">
+                                    <span class="btn-text-inner change">See more work</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>        <div class="footer-rounded-div" data-scroll-section>
+            <div class="rounded-div-wrap">
+                <div class="rounded-div"></div>
+            </div>
+        </div>
+        <div class="footer-wrap footer-footer-wrap theme-dark" data-scroll-section>
+            <footer class="section footer" data-scroll data-scroll-speed="-4" data-scroll-position="bottom">
+                <div class="container medium">
+                    <div class="row">
+                        <div class="flex-col">
+                            <div class="arrow">
+                                <svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <title>arrow-up-right</title>
+                                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="Artboard" transform="translate(-1019.000000, -279.000000)"
+                                            stroke="#FFFFFF" stroke-width="1.5">
+                                            <g id="arrow-up-right"
+                                                transform="translate(1026.000000, 286.000000) rotate(90.000000) translate(-1026.000000, -286.000000) translate(1020.000000, 280.000000)">
+                                                <polyline id="Path" points="2.76923077 0 12 0 12 9.23076923"></polyline>
+                                                <line x1="12" y1="0" x2="0" y2="12" id="Path"></line>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <h2 class="footer-heading">
+                                    <div class="profile-picture-bw footer-cover"></div>
+                                    <div class="footer-text">
+                                        <span>Let’s work</span>
+                                        <span>together</span>
+                                    </div>
+                                </h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="flex-col">
+                            <div class="stripe"></div>
+                            <div class="btn-fixed">
+                                <div class="btn btn-round" data-scroll data-scroll-speed="-1"
+                                    data-scroll-direction="horizontal" data-scroll-position="bottom"
+                                    data-scroll-offset="-50%, 0">
+                                    <a href="../../contact/" class="btn-click magnetic " data-strength="100"
+                                        data-strength-text="50">
+                                        <div class="btn-fill"></div>
+                                        <span class="btn-text">
+                                            <span class="btn-text-inner">Get in touch</span>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="flex-col">
+                            <div class="btn btn-normal">
+                                <a href="mailto:ippolitimattia@gmail.com" class="btn-click magnetic" data-strength="25"
+                                    data-strength-text="15">
+                                    <div class="btn-fill"></div>
+                                    <span class="btn-text">
+                                        <span class="btn-text-inner change">ippolitimattia@gmail.com</span>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container no-padding">
+                    <div class="row bottom-footer">
+                        <div class="flex-col">
+                            <div class="credits">
+                                <p class="section-label">Version</p>
+                                <p>2026 © Edition</p>
+                            </div>
+                            <div class="time">
+                                <p class="section-label">Local time</p>
+                                <p><span id="timeSpan">09:41 PM CET</span></p>
+                            </div>
+                        </div>
+                        <div class="flex-col">
+                            <div class="goodbye">
+                                <p class="section-label">Greetings</p>
+                                <p>made in Italy (Abruzzo 🍢) with ❤️</p>
+                            </div>
+                        </div>
+                        <div class="flex-col">
+                            <div class="socials">
+                                <p class="section-label">Socials</p>
+                                <ul>
+                                    <li class="btn btn-link btn-link-external">
+                                        <a href="https://github.com/MattiaIppoliti" target="_blank"
+                                            class="btn-click magnetic" data-strength="20" data-strength-text="10">
+                                            <span class="btn-text">
+                                                <span class="btn-text-inner">Github</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="btn btn-link btn-link-external">
+                                        <a href="https://www.researchgate.net/profile/Mattia-Ippoliti" target="_blank"
+                                            class="btn-click magnetic" data-strength="20" data-strength-text="10">
+                                            <span class="btn-text">
+                                                <span class="btn-text-inner">ResearchGate</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="btn btn-link btn-link-external">
+                                        <a href="https://www.linkedin.com/in/mattiaippoliti" target="_blank"
+                                            class="btn-click magnetic" data-strength="20" data-strength-text="10">
+                                            <span class="btn-text">
+                                                <span class="btn-text-inner">LinkedIn</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="stripe"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <div class="overlay overlay-gradient"></div>
+        </div>
+        </div>
+    </main>
+    <script defer src="../../assets/js/app.2081a472.min.js"></script>
+    <!-- Vercel Speed Insights -->
+    <script>
+      window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+
+</html>
