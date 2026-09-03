@@ -521,20 +521,17 @@
             <div class="container medium">
                 <div class="row">
                     <div class="flex-col">
-                        <h3 style="margin-bottom: .4em;">Situation</h3>
-                        <p>isybank is the digital bank of Intesa Sanpaolo. Its customers move money, hunt for documents and pay taxes through menus, and the tax forms are the worst of it. An F24 asks for a tax code, a section, a municipality code and an instalment code before it accepts a single euro. Almost nobody knows those by heart, and one wrong digit sends the money to the wrong treasury.</p>
+                        <p>isybank is the digital bank of Intesa Sanpaolo. Everything its customers do runs through menus, and the tax forms are the worst of it. An F24 wants a tax code, a section, a municipality code and an instalment code before it accepts a single euro. Almost nobody knows those by heart, and one wrong digit sends the money to the wrong treasury.</p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="flex-col">
-                        <h3 style="margin-bottom: .4em;">Task</h3>
-                        <p>Find out whether a generative assistant could carry out real operations from one spoken sentence rather than answer questions about them. The proof of concept had to live inside the app, work by voice or keyboard, and end with money actually moving.</p>
+                        <p>The brief was one assistant that could answer whatever a customer asked, by voice or by typing, and then act on the answer. Four kinds of request defined the scope. Questions about spending, where "how much did I spend last month on healthy food against junk food" comes back as a comparison chart rather than a paragraph. Questions about paperwork, where the assistant searches the document archive and pulls out the one statement or receipt the request points to. Transfers, carried out through the chat in steps. And an F24, filled the same way.</p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="flex-col">
-                        <h3 style="margin-bottom: .4em;">Action</h3>
-                        <p>I built a conversational layer over the existing banking services. It reads the intent, pulls the fields out of the sentence, and closes the gaps on its own. It finds an IBAN in the address book, turns the word IMU into tax codes 3912 through 3915, resolves Biella into municipality code A859. Then it stops, shows what it is about to do, and waits. Nothing executes without a confirmation, and when a form needs more than the sentence carried, the assistant asks for one field at a time.</p>
+                        <p>I built a conversational layer over the existing banking services. It reads the intent, pulls the fields out of the sentence, and closes the gaps on its own. It finds an IBAN in the address book, turns the word IMU into tax codes 3912 through 3915, resolves Biella into municipality code A859, categorises transactions so a spending question has something to compare. When the sentence carries less than a form needs, it asks for one field at a time instead of throwing a blank form back at you. Then it stops, shows what it is about to do, and waits. Nothing executes without a confirmation.</p>
                     </div>
                 </div>
                 <div class="row project-figure">
@@ -546,21 +543,12 @@
                 </div>
                 <div class="row">
                     <div class="flex-col">
-                        <h3 style="margin-bottom: .4em;">Result</h3>
-                        <p>One demo run covers four flows: a scheduled transfer, a search through unread documents, a filter over outgoing transactions, and an F24 payment. 50 â‚¬ to a named payee with the reason "cena", dated to the next day, executed after a single confirmation. The F24 came back precompiled with twelve fields, and the bank's own system posted the 200 â‚¬ payment and sent the usual notification. The customer typed no field values at any point.</p>
+                        <p>One demo run walks through four of these end to end: a scheduled transfer, a search through unread documents, a filter over outgoing transactions, and an F24 payment. Fifty euro to a named payee with the reason "cena", dated to the next day, sent after a single confirmation. The F24 came back precompiled across twelve fields, and the bank's own system posted the two hundred euro payment and pushed the usual notification. The customer typed no field values at any point.</p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="flex-col">
-                        <p>The language model is the least interesting part of this. What made it usable is the pause before execution: seven questions on the F24, each answered with a yes, then the full summary of twelve fields on screen. A wrong tax code is not a wrong answer, it is money in the wrong place, so the assistant would rather ask again than guess.</p>
-                    </div>
-                </div>
-                <div class="row project-figure">
-                    <div class="flex-col">
-                        <img src="../../assets/img/projects/isybank-02.webp"
-                            alt="The assistant answering with a list of accounted transactions, keyboard and microphone controls below"
-                            width="800" height="1640" loading="lazy" decoding="async"
-                            style="max-width: 380px; margin: 0 auto;">
+                        <p>The language model is the least interesting part of this. What makes it usable is the pause before execution: seven questions on the F24, each answered with a yes, then the full summary of twelve fields on screen. A wrong tax code is not a wrong answer, it is money in the wrong place, so the assistant would rather ask again than guess.</p>
                     </div>
                 </div>
             </div>
