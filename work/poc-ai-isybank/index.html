@@ -153,7 +153,12 @@
     <main class="main" id="project-isybank" data-barba="container" data-barba-namespace="project-isybank">
         <style>
             .project-hero { position: relative; overflow: hidden; }
-            .project-decor { position: absolute; inset: 0; pointer-events: none; }
+            /* .project-hero clips with overflow:hidden, so the decor sits fully
+               inside the box and the layer feathers at top and bottom. Either
+               one alone still showed a hard edge where a blob met the border. */
+            .project-decor { position: absolute; inset: 0; pointer-events: none;
+                -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 84%, transparent 100%);
+                mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 84%, transparent 100%); }
             .project-body .row { padding-top: 1.6em; }
             .project-body .row:first-child { padding-top: 0; }
             /* Copy runs to the same width as the figures rather than
@@ -384,9 +389,9 @@
             <header class="section default-header project-hero" data-scroll-section>
                 <div class="project-decor" aria-hidden="true">
                     <img src="../../assets/img/projects/decor/isybank-bubbles.webp" alt="" loading="lazy"
-                        style="position:absolute; right:3%; top:-10%; width:20%; max-width:250px; opacity:.32; -webkit-mask-image:radial-gradient(circle at 50% 50%, #000 34%, transparent 68%); mask-image:radial-gradient(circle at 50% 50%, #000 34%, transparent 68%);">
+                        style="position:absolute; right:4%; top:3%; width:17%; max-width:210px; opacity:.32; -webkit-mask-image:radial-gradient(circle at 50% 50%, #000 30%, transparent 62%); mask-image:radial-gradient(circle at 50% 50%, #000 30%, transparent 62%);">
                     <img src="../../assets/img/projects/decor/isybank-bubbles.webp" alt="" loading="lazy"
-                        style="position:absolute; left:2%; bottom:-14%; width:14%; max-width:170px; opacity:.24; transform:scaleX(-1); -webkit-mask-image:radial-gradient(circle at 50% 50%, #000 32%, transparent 66%); mask-image:radial-gradient(circle at 50% 50%, #000 32%, transparent 66%);">
+                        style="position:absolute; left:3%; bottom:3%; width:12%; max-width:150px; opacity:.24; transform:scaleX(-1); -webkit-mask-image:radial-gradient(circle at 50% 50%, #000 28%, transparent 60%); mask-image:radial-gradient(circle at 50% 50%, #000 28%, transparent 60%);">
                 </div>                <div class="nav-bar">
                     <div class="credits-top">
                         <div class="btn btn-link btn-left-top">
