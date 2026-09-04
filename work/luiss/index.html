@@ -198,7 +198,10 @@
                 .luiss-askbar kbd, .luiss-askbar-input { color: #000; }
             }
             @media (max-width: 767px) {
-                .luiss-askbar { right: 6%; top: auto; bottom: 12%; width: min(17rem, 78%); }
+                .luiss-askbar {
+                    right: 6%; top: auto; bottom: .25rem;
+                    width: min(15rem, 72%); height: 2.5rem; font-size: .92rem;
+                }
             }
             .project-body .row { padding-top: 1.6em; }
             .project-body .row:first-child { padding-top: 0; }
@@ -238,6 +241,143 @@
             @media (max-width: 767px) {
                 .project-meta-row .flex-col { width: 100%; padding-right: 0; margin-bottom: 2.6em; }
                 .project-note-icon, .project-note-icon svg, .project-note-icon img { width: 26px; max-width: 26px; }
+            }
+
+            /* The custom YouTube player is dependency-free so it also works
+               when this static page is entered through Barba navigation. The
+               iframe is created only after the visitor presses play. */
+            .cs-video-shell { flex: 1 1 auto; width: 100%; margin: 0; }
+            .cs-video-player {
+                position: relative; width: 100%; aspect-ratio: 16 / 9;
+                overflow: hidden; isolation: isolate; border-radius: 14px;
+                border: 1px solid rgba(28, 29, 32, .22); background: #111;
+                box-shadow: 0 18px 40px rgba(0, 0, 0, .14);
+            }
+            .cs-video-player iframe {
+                position: absolute; inset: 0; width: 100%; height: 100%;
+                border: 0; background: #000;
+            }
+            .cs-video-start {
+                position: absolute; inset: 0; z-index: 1; display: block;
+                width: 100%; height: 100%; padding: 0; border: 0;
+                overflow: hidden; cursor: pointer; color: #fff; background: #111;
+                font: inherit; text-align: left;
+            }
+            .cs-video-start::after {
+                content: ""; position: absolute; inset: 0; z-index: 1;
+                background: linear-gradient(180deg, rgba(0, 0, 0, .05) 42%, rgba(0, 0, 0, .72) 100%);
+            }
+            .cs-video-thumbnail {
+                /* aspect-ratio, not height:100%: a replaced element inside an
+                   aspect-ratio box falls back to its intrinsic size, which
+                   letterboxes any thumbnail that is not already 16:9. */
+                position: absolute; inset: 0; width: 100%; height: 100%;
+                aspect-ratio: 16 / 9;
+                display: block; object-fit: cover; opacity: .92;
+                transform: scale(1.002); filter: saturate(1.08);
+                transition: transform 500ms cubic-bezier(.2, .7, .3, 1), opacity 300ms ease;
+            }
+            .cs-video-start:hover .cs-video-thumbnail { transform: scale(1.025); opacity: 1; }
+            .cs-video-play {
+                position: absolute; left: 50%; top: 50%; z-index: 2;
+                display: grid; place-items: center; width: clamp(4.5rem, 8vw, 7rem);
+                height: clamp(4.5rem, 8vw, 7rem); border-radius: 50%;
+                transform: translate(-50%, -50%); color: #fff;
+                border: 1px solid rgba(255, 255, 255, .38);
+                background: rgba(28, 29, 32, .48);
+                backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+                transition: transform 220ms cubic-bezier(.2, .7, .3, 1), background-color 220ms ease;
+            }
+            .cs-video-start:hover .cs-video-play {
+                transform: translate(-50%, -50%) scale(1.06);
+                background: rgba(28, 29, 32, .68);
+            }
+            .cs-video-play svg { width: 31%; height: auto; margin-left: 5%; fill: currentColor; }
+            .cs-video-title {
+                position: absolute; left: clamp(1rem, 3vw, 2.25rem);
+                right: clamp(1rem, 3vw, 2.25rem); bottom: clamp(1rem, 3vw, 2rem);
+                z-index: 2; font-size: clamp(1rem, 2.1vw, 1.6rem);
+                font-weight: 600; line-height: 1.2; letter-spacing: -.012em;
+                text-shadow: 0 1px 12px rgba(0, 0, 0, .4);
+            }
+            .cs-video-expand {
+                position: absolute; top: clamp(.75rem, 2vw, 1.25rem);
+                right: clamp(.75rem, 2vw, 1.25rem); z-index: 3;
+                display: grid; place-items: center; width: 3rem; height: 3rem;
+                padding: 0; border-radius: 50%; cursor: pointer; color: #fff;
+                border: 1px solid rgba(255, 255, 255, .38);
+                background: rgba(28, 29, 32, .48);
+                backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+                transition: transform 180ms ease, background-color 180ms ease;
+            }
+            .cs-video-expand:hover { transform: scale(1.06); background: rgba(28, 29, 32, .68); }
+            .cs-video-expand svg { width: 1.1rem; height: 1.1rem; }
+            .cs-video-start:focus-visible, .cs-video-expand:focus-visible {
+                outline: 3px solid #fff; outline-offset: -5px;
+            }
+            .cs-video-player:fullscreen { border: 0; border-radius: 0; }
+            @media (prefers-reduced-motion: reduce) {
+                .cs-video-thumbnail, .cs-video-play, .cs-video-expand { transition: none; }
+                .cs-video-start:hover .cs-video-thumbnail { transform: none; }
+            }
+            @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+                .cs-video-play, .cs-video-expand {
+                    background: #1c1d20; backdrop-filter: none; -webkit-backdrop-filter: none;
+                }
+            }
+            @media (max-width: 560px) {
+                .cs-video-player { border-radius: 10px; }
+                .cs-video-expand { width: 2.5rem; height: 2.5rem; }
+                .cs-video-title { max-width: calc(100% - 4.5rem); }
+            }
+
+            /* Desktop browser frame. The window is the Safari mockup asset, so
+               the geometry below is that file's own canvas: a 2051x1263 board
+               whose page area is the rect at 65.5,97.5 sized 1920x1080. The
+               address is live text drawn where the mockup's own URL sat, and
+               the screenshot inside overhangs the page area; browser-frame.js
+               walks it down, holds at the footer, then snaps back to the top.
+               With reduced motion it simply rests at the top. */
+            .cs-browser { width: 100%; margin: 0; }
+            .cs-browser-window {
+                /* The window is 93.6129% of the mockup canvas; the rest is the
+                   room its drop shadow needs. Widening past the column by that
+                   ratio and pulling it back by half puts the window's own edges
+                   on the same line as the body copy, with only the shadow
+                   bleeding out. */
+                position: relative; width: 106.8228%; margin-left: -3.4114%;
+                aspect-ratio: 2051 / 1263;
+                container-type: inline-size;
+            }
+            .cs-browser-chrome {
+                position: absolute; inset: 0;
+                width: 100%; height: 100%; max-width: none; display: block;
+            }
+            .cs-browser-viewport {
+                position: absolute;
+                left: 3.1936%; top: 7.7197%; width: 93.6129%; height: 85.5107%;
+                overflow: hidden; background: #fff;
+                border-radius: 0 0 .5cqw .5cqw;
+            }
+            .cs-browser-page {
+                position: absolute; top: 0; left: 0;
+                width: 100%; height: auto; max-width: none; display: block;
+            }
+            .cs-browser.is-live .cs-browser-page { will-change: transform; }
+            .cs-browser-url {
+                /* Sized off the mockup's own address text, which measures 12.39
+                   units tall on its 2051-unit canvas, with the padlock 8.03 by
+                   11.61 and a 6.97-unit gap. In cqw against the window that is
+                   .83 for the type and .566 for the lock's height. */
+                position: absolute; top: 5.66%; left: 50%;
+                transform: translate(-50%, -50%);
+                display: flex; align-items: center; gap: .34cqw;
+                font-size: .83cqw; line-height: 1; color: #4c4c4c;
+                letter-spacing: .01em; white-space: nowrap; pointer-events: none;
+            }
+            .cs-browser-url svg { height: .566cqw; width: auto; flex: 0 0 auto; }
+            .cs-browser-caption {
+                margin: .9em 0 0; font-size: .82rem; color: rgba(28, 29, 32, .58);
             }
 
         </style>
@@ -431,6 +571,7 @@
                         <ul>
                             <li>AI Engineering,</li>
                             <li>Search,</li>
+                            <li>Vendor management,</li>
                             <li>Compliance.</li>
                         </ul>
                     </div>
@@ -441,6 +582,35 @@
                         <ul>
                             <li>2026.</li>
                         </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section project-body" data-scroll-section style="padding-top: 2.4em; padding-bottom: 0;">
+            <div class="container medium once-in">
+                <div class="row project-figure">
+                    <div class="flex-col">
+                        <figure class="cs-video-shell">
+                            <div class="cs-video-player" data-youtube-player>
+                                <button class="cs-video-start" type="button"
+                                    aria-label="Play Nuovo sito Luiss: Ricerca AI"
+                                    onclick='var player=this.closest("[data-youtube-player]"); player.classList.add("is-playing"); player.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/PkwdJSD9tM8?autoplay=1&amp;rel=0" title="Nuovo sito Luiss: Ricerca AI" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;'>
+                                    <img class="cs-video-thumbnail"
+                                        src="../../assets/img/projects/luiss-video-poster.webp"
+                                        alt="" width="1280" height="720" loading="lazy">
+                                    <span class="cs-video-play" aria-hidden="true">
+                                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    </span>
+                                    <span class="cs-video-title">Nuovo sito Luiss: Ricerca AI</span>
+                                </button>
+                                <button class="cs-video-expand" type="button" aria-label="View video full screen"
+                                    onclick='var player=this.closest("[data-youtube-player]"); if (player.requestFullscreen) { player.requestFullscreen(); } else if (player.webkitRequestFullscreen) { player.webkitRequestFullscreen(); }'>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </figure>
                     </div>
                 </div>
             </div>
@@ -459,12 +629,56 @@
                 </div>
                 <div class="row">
                     <div class="flex-col">
-                        <p>I worked on this as the internal owner on the Luiss side, alongside a design partner and an engineering vendor, covering the AI components, the technical review of the search engine, and the compliance track that ran in parallel. The goal was not a visual refresh. We had to shrink the content estate to what people actually read, replace Google with a search engine the university owns and can tune, and put a conversational assistant on top of it that answers in full sentences with citations back to the source page. All of it had to ship on one date, because a partial migration would have left two sites and two search behaviours running at once.</p>
+                        <p>I worked on this as the internal owner on the Luiss side, covering the AI components, part of the development itself, the technical review of the search engine, and the compliance track that ran in parallel. Managing the suppliers was mine too. SparkFabrik built the design system, the Drupal platform and the infrastructure and supported UI/UX, Altura Labs ran the field research and the information architecture, and Pezzilli handled editorial work and go-live support. I scoped what each of them owned, reviewed what came back, and held all of it to a launch date that could not move. The goal was not a visual refresh. We had to shrink the content estate to what people actually read, replace Google with a search engine the university owns and can tune, and put a conversational assistant on top of it that answers in full sentences with citations back to the source page. All of it had to ship on one date, because a partial migration would have left two sites and two search behaviours running at once.</p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="flex-col">
-                        <p>The content work came first and was the least glamorous part. Every page was classified as keep, merge, archive, or redirect, with the offices that owned the content doing the classification rather than a central team guessing. Anything cut stayed retrievable rather than deleted, which mattered for the internal politics as much as for the link equity.</p>
+                        <p>The content work came first, was the least glamorous part, and took the longest: fifteen months, more than 120 interviews run by Altura Labs, and over twenty offices pulled into the process. Every page was classified as keep, merge, archive, or redirect, with the offices that owned the content doing the classification rather than a central team guessing. Anything cut stayed retrievable rather than deleted, which mattered for the internal politics as much as for the link equity.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="flex-col">
+                        <p>The other half of the rebuild was a design system rather than a site. The brand stopped being a PDF that every office interpreted its own way and became tokens and components wired into the code, one source of truth that dresses the corporate site now and is built to dress the ecosystem of department and research centre sites behind it without cloning anything. What gets approved in Figma is what ships, which retired the recurring argument about why the live page does not match the mockup.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section project-body" data-scroll-section style="padding-top: 2.4em; padding-bottom: 0;">
+            <div class="container medium">
+                <div class="row project-figure">
+                    <div class="flex-col">
+                        <figure class="cs-browser" data-browser-frame>
+                            <div class="cs-browser-window">
+                                <img class="cs-browser-chrome" src="../../assets/img/projects/decor/safari-chrome.svg"
+                                    alt="" width="2051" height="1263" aria-hidden="true" loading="lazy" decoding="async">
+                                <span class="cs-browser-url" aria-hidden="true">
+                                    <svg viewBox="0 0 9 13" fill="currentColor"><path d="M4.5 0a2.9 2.9 0 0 0-2.9 2.9V5H1.3A1.3 1.3 0 0 0 0 6.3v5.4A1.3 1.3 0 0 0 1.3 13h6.4A1.3 1.3 0 0 0 9 11.7V6.3A1.3 1.3 0 0 0 7.7 5H7.4V2.9A2.9 2.9 0 0 0 4.5 0Zm0 1.35A1.55 1.55 0 0 1 6.05 2.9V5h-3.1V2.9A1.55 1.55 0 0 1 4.5 1.35Z"/></svg>
+                                    luiss.it
+                                </span>
+                                <div class="cs-browser-viewport">
+                                    <img class="cs-browser-page"
+                                        src="../../assets/img/projects/luiss-homepage-scroll.webp"
+                                        alt="The rebuilt Luiss.edu homepage from top to bottom: hero, the school entry points, latest news, upcoming events, and the footer"
+                                        width="1960" height="7640" loading="lazy" decoding="async">
+                                </div>
+                            </div>
+                            <figcaption class="cs-browser-caption">The homepage, one pass from the hero to the footer.</figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section project-body" data-scroll-section style="padding-top: 2.4em; padding-bottom: 0;">
+            <div class="container medium">
+                <div class="row">
+                    <div class="flex-col">
+                        <p>The piece I expect to matter most internally is self provisioning. A department that wants its own site picks a master template from a dashboard and has one running in minutes, with the design system and the security baseline already in it. That used to be a project with a budget and a place in a queue. It is now an operation, and because every site inherits from the same template, a security update reaches all of them from one point instead of being chased across dozens of separate installations.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="flex-col">
+                        <p>Translation works the same way, assisted rather than automated. An AI engine drafts the second language and a person approves before anything publishes. That was the only arrangement the editorial teams would have accepted, and the only one I would have signed.</p>
                     </div>
                 </div>
                 <div class="row">
@@ -496,12 +710,43 @@
                 </div>
                 <div class="row">
                     <div class="flex-col">
-                        <p>The compliance track ran alongside and gated the launch. A vulnerability assessment by an external firm closed with no findings, static analysis output was required from the vendor, and the AI Act impact and risk assessment classified the module as limited risk with transparency obligations, which is what a search assistant over public content should be. Conversational data masking was not ready, so we went live explicitly without it, restricted access to session context and to records carrying explicit user feedback, and reduced retention as an interim measure rather than pretending the control existed.</p>
+                        <p>Underneath all of it, Drupal runs the content lifecycle on cloud native infrastructure, open source end to end. That was a deliberate choice about ownership rather than a technical preference: the university can run and move its own platform instead of renting a black box from whoever sold it. The modules SparkFabrik wrote for us went back to the Drupal community, which is a fair test of whether the work was any good. The content architecture is also structured for how people search now, which increasingly means a model answering on the university’s behalf. If it is going to answer anyway, it should answer from our pages.</p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="flex-col">
-                        <p>The new site went live on 23 June 2026 with the search engine and the assistant integrated natively. Content dropped from more than 66,000 pages to around 23,000. Search is now ours, tunable in a working day rather than through a black box, and inference costs run at roughly twenty euro per day at current traffic. The change that will outlast the technology is governance. Every office is now accountable for its own pages, publication is centralised through one editorial team, and technical reports route through a ticketing queue instead of arriving as direct emails to whoever was in the last meeting.</p>
+                        <p>Accessibility was designed into the components rather than audited onto them at the end: keyboard first, contrast checked, screen reader native, text resizable. The compliance track ran alongside and gated the launch. A vulnerability assessment by an external firm closed with no findings, static analysis output was required from the vendor, and the AI Act impact and risk assessment classified the module as limited risk with transparency obligations, which is what a search assistant over public content should be. Conversational data masking was not ready, so we went live explicitly without it, restricted access to session context and to records carrying explicit user feedback, and reduced retention as an interim measure rather than pretending the control existed.</p>
+                    </div>
+                </div>
+                <div class="row project-figure">
+                    <div class="flex-col">
+                        <img src="../../assets/img/projects/luiss-launch.webp" alt="The new Luiss.edu homepage open on a laptop, with the launch announcement headline in Italian"
+                            width="2000" height="1137" loading="lazy" decoding="async">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="flex-col">
+                        <p>The new site <a href="https://www.luiss.it/en/university/news-media/news/new-luiss-website-open-accessible-and-evolving-digital-ecosystem" target="_blank" rel="noopener">went live on 23 June 2026</a> with the search engine and the assistant integrated natively. Content dropped from more than 66,000 pages to around 23,000. Search is now ours, tunable in a working day rather than through a black box.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="flex-col">
+                        <p>Two reporting periods in, July and August, the platform has handled more than 25,000 interactions and over 5,000 AI chat sessions. August is the number I did not expect: 14,152 interactions against 11,566 in July, a 22.4% rise, in the month the university empties out. Of those, 5,485 were searches and 1,938 were AI chats. After a round of fixes drawn from the first month of feedback, the model completed 98.0% of requests successfully, at an average inference cost of around eleven dollars a day.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="flex-col">
+                        <p>78% of assistant conversations end after the first answer, and 80.1% of the feedback people left is positive. Together those two numbers say the same thing: most visitors get a usable answer and leave. It also confirms the assistant is being used as a search engine that replies in sentences rather than as something to hold a conversation with, which is worth knowing before anyone invests in longer dialogue.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="flex-col">
+                        <p>The result that matters most sits outside the platform. Over the two months, calls to the call centre fell 12% and emails to the offices that field student questions first, admissions, the registry, Erasmus, housing, fell 7%. I would not yet call that causation, since the same two months are the quietest of the academic year, but it is the first evidence that answering a question on the website removes work from the people who used to answer it by hand.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="flex-col">
+                        <p>The change that will outlast the technology is governance. Every office is now accountable for its own pages, publication is centralised through one editorial team, and technical reports route through a ticketing queue instead of arriving as direct emails to whoever was in the last meeting.</p>
                     </div>
                 </div>
             </div>
@@ -646,6 +891,7 @@
         </div>
     </main>
     <script defer src="../../assets/js/app.2081a472.min.js"></script>
+    <script defer src="../../assets/js/browser-frame.js"></script>
 
 
     <!-- Vercel Speed Insights -->
