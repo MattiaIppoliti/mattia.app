@@ -223,7 +223,11 @@
                 background: linear-gradient(180deg, rgba(0, 0, 0, .05) 42%, rgba(0, 0, 0, .72) 100%);
             }
             .cs-video-thumbnail {
+                /* aspect-ratio, not height:100%: a replaced element inside an
+                   aspect-ratio box falls back to its intrinsic size, which
+                   letterboxes any thumbnail that is not already 16:9. */
                 position: absolute; inset: 0; width: 100%; height: 100%;
+                aspect-ratio: 16 / 9;
                 display: block; object-fit: cover; opacity: .92;
                 transform: scale(1.002); filter: saturate(1.08);
                 transition: transform 500ms cubic-bezier(.2, .7, .3, 1), opacity 300ms ease;
