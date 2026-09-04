@@ -198,8 +198,13 @@
                 .luiss-askbar kbd, .luiss-askbar-input { color: #000; }
             }
             @media (max-width: 767px) {
+                /* The bar lives in the hero's bottom padding, and the hero
+                   clips its overflow, so a capsule flush with that edge gets
+                   its blur sliced off against the first line of copy. Widen
+                   the band and seat the bar inside it with room on both sides. */
+                .project-hero { padding-bottom: 6rem; }
                 .luiss-askbar {
-                    right: 6%; top: auto; bottom: .25rem;
+                    right: 6%; top: auto; bottom: 1.6rem;
                     width: min(15rem, 72%); height: 2.5rem; font-size: .92rem;
                 }
             }
